@@ -6,7 +6,7 @@ inputTemplate: '{ "input": {   "class": "File",   "location": "{{input}}" } }'
 
 sites: 
     - site:                 http://localhost:8080/ga4gh/wes/v1
-      inputTemplateParams:  { input: file:///tmp/hashSplitterInput/test1.txt }
+      inputTemplateParams:  { input: 'file:///tmp/hashSplitterInput/test1.txt' }
     - site:                 http://localhost:8080/ga4gh/wes/v1
-      inputTemplateParams:  { input: file:///tmp/hashSplitterInput/test2.txt }
+      inputTemplateParams:  { input: 'file:///tmp/hashSplitterInput/test2.txt' }
 
