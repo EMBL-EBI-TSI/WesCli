@@ -1,0 +1,16 @@
+
+
+makeLink() {
+
+    ln -svf "$(pipenv --venv)/bin/$1" "$2"
+}
+
+
+
+./init
+
+echo
+
+makeLink wes ~/bin/
+makeLink wes ./run
+

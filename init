@@ -1,0 +1,16 @@
+
+# Pipenv goes *insane* if you don't do this
+echo 'Removing link to virtualenv (possibly created in the last run)...'
+rm -v .venv
+
+# Create the virtualenv
+echo
+pipenv --three
+
+# Install dev dependencies
+pipenv install --dev
+
+echo
+echo 'Create symlink to virtualenv...'
+ln -svf "$(pipenv --venv)" .venv
+
