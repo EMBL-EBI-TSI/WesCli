@@ -9,6 +9,7 @@ name = "pypi"
 "e1839a8" = {path = ".", editable = true}
 pyyaml = "*"
 "jinja2" = "*"
+requests = "*"
 
 [requires]
 python_version = "3.6"
