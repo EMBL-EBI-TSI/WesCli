@@ -58,7 +58,7 @@ def run( wesUrl         : str
     })
     
     if   r.status_code == requests.codes.ok : return Ok(r.json())
-    else                                    : return Error((r.status_code, r.text))    # TODO receive 2 args in __init__ ?
+    else                                    : return Error(r.json())
 
 
 class Ok(object):
@@ -71,6 +71,10 @@ class Ok(object):
 
 class Error(object):
     def __init__(self, v): self.v = v
+
+    def __str__(self, *args, **kwargs):
+        
+        return f"Error({self.v})"
 
 
 
