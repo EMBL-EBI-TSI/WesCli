@@ -1,7 +1,8 @@
 # encoding: utf-8
 
 import unittest
-from WesCli.WesCli import run, Ok, Error
+from WesCli.WesCli import run
+from WesCli.either import Ok, Error
 
 
 class IntegrationTest(unittest.TestCase):
