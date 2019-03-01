@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 import unittest
-from WesCli.WesCli import run
+from WesCli.WesCli import run, run_multiple
 from WesCli.either import Ok, Error
 
 
@@ -34,6 +34,12 @@ class IntegrationTest(unittest.TestCase):
         self.assertTrue('status_code'   in r.v)
         
 
+    def test_run_multiple(self):
+        
+        run_multiple('examples/sitesWithError.yaml')
+        
+
+            
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

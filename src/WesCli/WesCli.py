@@ -61,3 +61,30 @@ def run( wesUrl         : str
     if   r.status_code == requests.codes.ok : return Ok(r.json())
     else                                    : return Error(r.json())
 
+
+def run_multiple(yamlFilename):
+    
+    yaml = loadYaml(yamlFilename)
+        
+    conf = getEffectiveConf(yaml)
+    
+    workflow = conf['workflow']
+    
+    for s in conf['sites']:
+        '''
+        ,'sites': [
+            { 'input' : '{ "input": {   "class": "File",   "location": "file:///tmp/hashSplitterInput/test1.txt" } }'
+            , 'url'   : 'http://localhost:8080/ga4gh/wes/v1'
+            }
+        '''
+        
+        url   = s['url']
+        input = s['input']
+        
+        print(f'{url}... ', end='')
+        
+        r = run(url, workflow, input)
+        
+        if   type(r) == Ok : print(r.v['run_id'])
+        else               : print(r)
+
