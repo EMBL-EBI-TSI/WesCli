@@ -4,6 +4,8 @@ import yaml
 from jinja2 import Template
 import requests
 from WesCli.either import Ok, Error
+import json
+from WesCli.LocalState import LocalState
 
 
 def loadYaml(filename):
@@ -70,6 +72,8 @@ def run_multiple(yamlFilename):
     
     workflow = conf['workflow']
     
+    localState = LocalState(workflow)
+    
     for s in conf['sites']:
         '''
         ,'sites': [
@@ -85,6 +89,9 @@ def run_multiple(yamlFilename):
         
         r = run(url, workflow, input)
         
-        if   type(r) == Ok : print(r.v['run_id'])
-        else               : print(r)
+        idOrError = r.v['run_id'] if type(r) == Ok else str(r)
+        
+        print(idOrError)
+        localState.add(url, idOrError)  # , inputTemplateParams    # TODO?
+        localState.save()
 
