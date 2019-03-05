@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
+encoding//src/WesCli/ArgParser.py=utf-8
+encoding//src/WesCli/ArgParser_example.py=utf-8
 encoding//src/WesCli/Main.py=utf-8
 encoding//src/WesCli/WesCli.py=utf-8
 encoding//test/IntegrationTest.py=utf-8

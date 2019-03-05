@@ -10,6 +10,7 @@ name = "pypi"
 pyyaml = "*"
 "jinja2" = "*"
 requests = "*"
+docopt = "*"
 
 [requires]
 python_version = "3.6"
