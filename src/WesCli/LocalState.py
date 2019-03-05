@@ -41,7 +41,10 @@ class LocalState(object):
             
         with open(DOT_FILE) as f:
         
-            self.lists = json.load(f)
+            d = json.load(f)
+            
+            self.workflowUrl = d['workflowUrl']
+            self.sites       = d['sites']
             
 
     def asDict(self):

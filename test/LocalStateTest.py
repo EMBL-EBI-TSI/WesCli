@@ -33,6 +33,25 @@ class LocalStateTest(unittest.TestCase):
         })
     
     
+    def test_load_save(self):
+    
+        s1 = LocalState('')
+        
+        s2 = LocalState('https://workflowhub.org/my-workflow.cwl')
+        s2.add('http://localhost:8080/ga4gh/wes/v1', '6DNIPZ')
+        s2.add('http://localhost:8081/ga4gh/wes/v1', 'KSSGG3')
+        s2.add('http://localhost:8082/ga4gh/wes/v1', 'Something terrible happened.')
+        
+
+        self.assertEquals(s1.asDict(), {'workflowUrl': '', 'sites': []})
+        self.assertNotEquals(s1.asDict(), s2.asDict())
+        
+        s2.save()
+        
+        s1.load()
+        
+        self.assertEquals(s1.asDict(), s2.asDict())
+
         
         
 
