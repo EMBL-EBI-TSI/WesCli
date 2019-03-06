@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 import unittest
-from WesCli.WesCli import run, run_multiple
+from WesCli.WesCli import run, run_multiple, status
 from WesCli.either import Ok, Error
 
 
@@ -39,6 +39,25 @@ class IntegrationTest(unittest.TestCase):
         run_multiple('examples/sitesWithError.yaml')
         
 
+    def test_status(self):
+        
+        url = 'http://localhost:8080/ga4gh/wes/v1'
+        
+        r = run( url
+               , 'https://github.com/fgypas/cwl-example-workflows/blob/master/hashsplitter-workflow.cwl'
+               , '{ "input": {   "class": "File",   "location": "file:///tmp/hashSplitterInput/test.txt" } }'
+               )
+        
+        print(r)                                    # Ok({'run_id': 'S28J1E'})
+        
+        self.assertEquals(type(r), Ok)
+        
+        s = status(url, r.v['run_id'])
+        
+        print(s)                                    # Ok(UNKNOWN)
+        
+        self.assertEquals(type(s), Ok)
+            
             
 
 if __name__ == "__main__":

@@ -64,6 +64,14 @@ def run( wesUrl         : str
     else                                    : return Error(r.json())
 
 
+def status(wesUrl, id):
+    
+    r = requests.get(f"{wesUrl}/runs/{id}/status")
+    
+    if   r.status_code == requests.codes.ok : return Ok(r.json()['state'])
+    else                                    : return Error(r.text)
+
+
 def run_multiple(yamlFilename):
     
     yaml = loadYaml(yamlFilename)
