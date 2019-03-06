@@ -24,6 +24,23 @@ class ArgParserTest(unittest.TestCase):
         self.assertKeyValue(args, '<runSpec>'   , 'sites.yaml')
         
 
+    def test_status(self):
+        
+        args = getOpts(['status', '6DNIPZ'])
+    
+        print(args)
+        
+        '''
+         {'<runId>': '6DNIPZ',
+          '<runSpec>': None,
+          'run': False,
+          'status': True}
+        '''
+        
+        self.assertKeyValue(args, 'status'      , True)
+        self.assertKeyValue(args, '<runId>'     , '6DNIPZ')
+        
+
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
