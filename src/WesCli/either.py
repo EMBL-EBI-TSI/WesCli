@@ -5,6 +5,18 @@ class Either(object):
     def isOk(self):
         
         return type(self) == Ok
+    
+    
+    def map(self, f):
+        '''
+        map(lambda v: v['run_id'])   # Ok({'run_id': 'S28J1E'}) => Ok('S28J1E')
+        '''
+        
+        if self.isOk():
+            
+            self.v = f(self.v)
+        
+    
 
 
 class Ok(Either):

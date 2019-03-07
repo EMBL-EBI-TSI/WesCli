@@ -3,9 +3,10 @@
 import yaml
 from jinja2 import Template
 import requests
-from WesCli.either import Ok, Error
+from WesCli.either import Ok, Error, Either
 import json
 from WesCli.LocalState import LocalState
+from pydash.collections import partition
 
 
 def loadYaml(filename):
@@ -64,7 +65,7 @@ def run( wesUrl         : str
     else                                    : return Error(r.json())
 
 
-def status(wesUrl, id):
+def status(wesUrl, id) -> Either:
     
     r = requests.get(f"{wesUrl}/runs/{id}/status")
     
@@ -106,6 +107,48 @@ def run_multiple(yamlFilename):
         r = run(url, workflow, input)
         
         print(r.v['run_id'] if r.isOk() else str(r))
+
+        r.map(lambda v: v['run_id'])      # Ok({'run_id': 'S28J1E'}) => Ok('S28J1E')
+        
         localState.add(url, r)  # , inputTemplateParams    # TODO?
         localState.save()
+
+
+def status_multiple():
+    
+    s = LocalState('')
+        
+    s.load()
+    
+    '''
+        'workflowUrl' : 'https://workflowhub.org/my-workflow.cwl'
+       ,'sites': [
+           
+            { 'url' : 'http://localhost:8080/ga4gh/wes/v1', 'ok': True,  'id'    : '6DNIPZ' }
+           ,{ 'url' : 'http://localhost:8081/ga4gh/wes/v1', 'ok': True,  'id'    : 'KSSGG3' }
+           ,{ 'url' : 'http://localhost:8082/ga4gh/wes/v1', 'ok': False, 'error' : 'Something terrible happened.' }
+        ]
+    '''
+    
+    sites = s.sites
+    
+    successes, failures = partition(sites, lambda s: s['ok'])
+    
+    for site in successes:
+        
+        st = status(site['url'], site['id'])
+        
+        print(f"{site['url']}  {site['id']}  {st.v}")
+        
+    print()
+    print('Failures:')
+        
+    for site in failures:
+        
+        print(f"{site['url']}  {site['error']}")
+        
+    
+    
+
+
 

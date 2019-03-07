@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 import unittest
-from WesCli.WesCli import run, run_multiple, status, info
+from WesCli.WesCli import run, run_multiple, status, info, status_multiple
 from WesCli.either import Ok, Error
 
 
@@ -37,6 +37,16 @@ class IntegrationTest(unittest.TestCase):
     def test_run_multiple(self):
         
         run_multiple('examples/sitesWithError.yaml')
+        
+
+    def test_status_multiple(self):
+        
+        print('-- run examples/sitesWithError.yaml ---------------------------------------')
+        run_multiple('examples/sitesWithError.yaml')
+        
+        print()
+        print('-- status_multiple() ------------------------------------------------------')
+        status_multiple()
         
 
     def test_status_and_info(self):

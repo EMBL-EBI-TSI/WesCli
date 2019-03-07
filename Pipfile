@@ -11,6 +11,7 @@ pyyaml = "*"
 "jinja2" = "*"
 requests = "*"
 docopt = "*"
+pydash = "*"
 
 [requires]
 python_version = "3.6"
