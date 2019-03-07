@@ -2,6 +2,7 @@
 
 import unittest
 from WesCli.LocalState import LocalState
+from WesCli.either import Ok, Error
 
 
 class LocalStateTest(unittest.TestCase):
@@ -15,9 +16,9 @@ class LocalStateTest(unittest.TestCase):
         
         s = LocalState('https://workflowhub.org/my-workflow.cwl')
         
-        s.add('http://localhost:8080/ga4gh/wes/v1', '6DNIPZ')
-        s.add('http://localhost:8081/ga4gh/wes/v1', 'KSSGG3')
-        s.add('http://localhost:8082/ga4gh/wes/v1', 'Something terrible happened.')
+        s.add('http://localhost:8080/ga4gh/wes/v1', Ok('6DNIPZ'))
+        s.add('http://localhost:8081/ga4gh/wes/v1', Ok('KSSGG3'))
+        s.add('http://localhost:8082/ga4gh/wes/v1', Error('Something terrible happened.'))
         
         print(s)
         
@@ -26,9 +27,9 @@ class LocalStateTest(unittest.TestCase):
             'workflowUrl' : 'https://workflowhub.org/my-workflow.cwl'
            ,'sites': [
                
-                { 'url' : 'http://localhost:8080/ga4gh/wes/v1', 'idOrError' : '6DNIPZ' }
-               ,{ 'url' : 'http://localhost:8081/ga4gh/wes/v1', 'idOrError' : 'KSSGG3' }
-               ,{ 'url' : 'http://localhost:8082/ga4gh/wes/v1', 'idOrError' : 'Something terrible happened.' }
+                { 'url' : 'http://localhost:8080/ga4gh/wes/v1', 'ok': True,  'id'    : '6DNIPZ' }
+               ,{ 'url' : 'http://localhost:8081/ga4gh/wes/v1', 'ok': True,  'id'    : 'KSSGG3' }
+               ,{ 'url' : 'http://localhost:8082/ga4gh/wes/v1', 'ok': False, 'error' : 'Something terrible happened.' }
             ]
         })
     
@@ -38,9 +39,9 @@ class LocalStateTest(unittest.TestCase):
         s1 = LocalState('')
         
         s2 = LocalState('https://workflowhub.org/my-workflow.cwl')
-        s2.add('http://localhost:8080/ga4gh/wes/v1', '6DNIPZ')
-        s2.add('http://localhost:8081/ga4gh/wes/v1', 'KSSGG3')
-        s2.add('http://localhost:8082/ga4gh/wes/v1', 'Something terrible happened.')
+        s2.add('http://localhost:8080/ga4gh/wes/v1', Ok('6DNIPZ'))                         
+        s2.add('http://localhost:8081/ga4gh/wes/v1', Ok('KSSGG3'))                         
+        s2.add('http://localhost:8082/ga4gh/wes/v1', Error('Something terrible happened.'))
         
 
         self.assertEquals(s1.asDict(), {'workflowUrl': '', 'sites': []})

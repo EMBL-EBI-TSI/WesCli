@@ -105,9 +105,7 @@ def run_multiple(yamlFilename):
         
         r = run(url, workflow, input)
         
-        idOrError = r.v['run_id'] if type(r) == Ok else str(r)
-        
-        print(idOrError)
-        localState.add(url, idOrError)  # , inputTemplateParams    # TODO?
+        print(r.v['run_id'] if r.isOk() else str(r))
+        localState.add(url, r)  # , inputTemplateParams    # TODO?
         localState.save()
 

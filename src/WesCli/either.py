@@ -1,6 +1,13 @@
 
 
-class Ok(object):
+class Either(object):
+    
+    def isOk(self):
+        
+        return type(self) == Ok
+
+
+class Ok(Either):
     def __init__(self, v): self.v = v
     
     def __str__(self, *args, **kwargs):
@@ -8,7 +15,7 @@ class Ok(object):
         return f"Ok({self.v})"
 
 
-class Error(object):
+class Error(Either):
     def __init__(self, v): self.v = v
 
     def __str__(self, *args, **kwargs):

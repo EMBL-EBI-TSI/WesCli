@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 import json
+from WesCli.either import Either
 
 
 DOT_FILE = '.wes'
@@ -21,13 +22,23 @@ class LocalState(object):
         self.sites = []
         
     
-    def add(self, url, idOrError): 
+    def add(self, url
+                , idOrError: Either): 
         
-        self.sites.append({
+        s = {
             
-            'url'         : url     
-          , 'idOrError'   : idOrError
-        })
+            'url'  : url
+           ,'ok'   : True
+           ,'id'   : idOrError.v
+        
+        } if idOrError.isOk() else {
+            
+            'url'   : url     
+           ,'ok'    : False
+           ,'error' : idOrError.v
+        } 
+        
+        self.sites.append(s)
         
 
     def save(self):
