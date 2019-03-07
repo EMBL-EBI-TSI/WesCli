@@ -16,7 +16,7 @@ def getOpts(args):
     doc = """
 Usage:
     wes run <runSpec>
-    wes status <runId>
+    wes status
 
 
 Options:

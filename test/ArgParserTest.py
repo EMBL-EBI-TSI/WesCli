@@ -26,19 +26,17 @@ class ArgParserTest(unittest.TestCase):
 
     def test_status(self):
         
-        args = getOpts(['status', '6DNIPZ'])
+        args = getOpts(['status'])
     
         print(args)
         
         '''
-         {'<runId>': '6DNIPZ',
-          '<runSpec>': None,
-          'run': False,
-          'status': True}
+        {'<runSpec>': None,
+         'run': False,
+         'status': True}
         '''
         
-        self.assertKeyValue(args, 'status'      , True)
-        self.assertKeyValue(args, '<runId>'     , '6DNIPZ')
+        self.assertKeyValue(args, 'status', True)
         
 
 

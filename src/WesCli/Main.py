@@ -2,7 +2,7 @@
 
 import sys
 from WesCli.ArgParser import getOpts
-from WesCli.WesCli import run_multiple
+from WesCli.WesCli import run_multiple, status, status_multiple
 
 
 def main(args):
@@ -11,11 +11,8 @@ def main(args):
     
 #     print(opts)
     
-#     {'<runSpec>': 'examples/sitesWithError.yaml',
-#      'run': True}
-
-    run_multiple(opts['<runSpec>'])
-    
+    if   opts['run']    :    run_multiple(opts['<runSpec>'])
+    elif opts['status'] :    status_multiple()
     
     
         
