@@ -1,0 +1,2 @@
+
+watch -n 1 -d ./run status

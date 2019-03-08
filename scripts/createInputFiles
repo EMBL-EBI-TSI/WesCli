@@ -1,0 +1,32 @@
+
+
+require map
+
+
+createInputFile() {
+
+    local index="$1"
+    local filePath="$2"
+
+    echo '-- Creating input file ---------------------------------------------------------------------'
+
+    echo "Hello World $index" > "$filePath"
+
+    echo
+    echo 'Content:'
+    cat "$filePath"
+    echo '--------------------------------------------------------------------------------------------'
+    echo
+}
+
+# createInputFile '"$inputDir"test.txt'
+
+inputDir='/tmp/hashSplitterInput/'
+
+mkdir "$inputDir"
+
+map "createInputFile % $inputDir/test%.txt" {1..5}
+
+echo
+ls -l "$inputDir"
+
