@@ -114,6 +114,23 @@ def run_multiple(yamlFilename):
         localState.save()
 
 
+def formatOutputs(outputs):
+    '''
+    {
+      "output": {
+        "basename": "unify",
+        "checksum": "sha1$e823b2bf8f0babdabe0e4c7399d8afe6ece73aec",
+        "class": "File",
+        "location": "file:///tmp/tmpjt14260x/unify",
+        "path": "/tmp/tmpjt14260x/unify",
+        "size": 413
+      }
+    }
+    '''
+    
+    return { name: o['path'] for (name, o) in outputs.items() }
+
+
 def status_multiple():
     
     s = LocalState('')
@@ -136,9 +153,12 @@ def status_multiple():
     
     for site in successes:
         
-        st = status(site['url'], site['id'])
+        st = info(site['url'], site['id'])
         
-        print(f"{site['url']}  {site['id']}  {st.v}")
+        state   = st.v['state']                     if st.isOk() else ''
+        outputs = formatOutputs(st.v['outputs'])    if st.isOk() else ''
+        
+        print(f"{site['url']}  {site['id']}  {state}  {outputs}")
         
     print()
     print('Failures:')
