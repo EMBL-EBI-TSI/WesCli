@@ -2,8 +2,9 @@
 
 import unittest
 from pprint import pprint
-from WesCli.WesCli import loadYaml, getEffectiveConf
+from WesCli.WesCli import loadYaml, getEffectiveConf, hasTemplateParams
 from jinja2 import Template
+from WesCli.exception import InvalidConf
 
 
 class Test(unittest.TestCase):
@@ -58,6 +59,42 @@ class Test(unittest.TestCase):
             })
         
         
+    def test_hasTemplateParams(self):
+        
+        # Everybody has
+        self.assertTrue(hasTemplateParams([
+             
+            { 'url': 'http://localhost:8080/ga4gh/wes/v1'
+            , 'inputTemplateParams': { 'a': 1 }
+            }
+            
+           ,{ 'url': 'http://localhost:8080/ga4gh/wes/v1'
+            , 'inputTemplateParams': { 'a': 2 }
+            }
+        ]))
+        
+        # Nobody has
+        self.assertFalse(hasTemplateParams([
+             
+            {'url': 'http://localhost:8080/ga4gh/wes/v1'}
+           ,{'url': 'http://localhost:8080/ga4gh/wes/v1'}
+        ]))
+
+        # Somebody has => error
+        with self.assertRaises(InvalidConf):
+             
+            hasTemplateParams([
+             
+                {'url': 'http://localhost:8080/ga4gh/wes/v1'}
+                 
+               ,{ 'url': 'http://localhost:8080/ga4gh/wes/v1'
+                , 'inputTemplateParams': { 'a': 1 }
+                }
+            ])
+
+
+
+
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

@@ -7,6 +7,7 @@ from WesCli.either import Ok, Error, Either
 import json
 from WesCli.LocalState import LocalState
 from pydash.collections import partition
+from WesCli.exception import InvalidConf
 
 
 def loadYaml(filename):
@@ -16,6 +17,15 @@ def loadYaml(filename):
         return yaml.safe_load(f)
 
 
+def hasTemplateParams(sites):
+
+    has, hasnt = partition(sites, lambda s: 'inputTemplateParams' in s)
+    
+    if   len(has)   == len(sites) : return True
+    elif len(hasnt) == len(sites) : return False
+    else                          : raise InvalidConf()
+    
+    
 def getEffectiveConf(conf):
     
     inputTemplate   = conf['inputTemplate']

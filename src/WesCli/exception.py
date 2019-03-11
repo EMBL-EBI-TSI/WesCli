@@ -1,0 +1,5 @@
+
+
+class InvalidConf(Exception):
+    pass
+
