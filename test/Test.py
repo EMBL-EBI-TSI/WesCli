@@ -59,6 +59,13 @@ class Test(unittest.TestCase):
             })
         
         
+    def test_getEffectiveConf_single_site(self):
+        
+        yaml = loadYaml('examples/singleSite.yaml')
+        
+        self.assertEqual(getEffectiveConf(yaml), yaml)
+            
+            
     def test_hasTemplateParams(self):
         
         # Everybody has

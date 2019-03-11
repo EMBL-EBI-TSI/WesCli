@@ -28,6 +28,11 @@ def hasTemplateParams(sites):
     
 def getEffectiveConf(conf):
     
+    return replaceVariables(conf) if hasTemplateParams(conf['sites']) else conf
+    
+    
+def replaceVariables(conf):
+    
     inputTemplate   = conf['inputTemplate']
     sites           = conf['sites']
     
