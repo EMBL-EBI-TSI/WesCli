@@ -72,11 +72,11 @@ class Test(unittest.TestCase):
         self.assertTrue(hasTemplateParams([
              
             { 'url': 'http://localhost:8080/ga4gh/wes/v1'
-            , 'inputTemplateParams': { 'a': 1 }
+            , 'inputParams': { 'a': 1 }
             }
             
            ,{ 'url': 'http://localhost:8080/ga4gh/wes/v1'
-            , 'inputTemplateParams': { 'a': 2 }
+            , 'inputParams': { 'a': 2 }
             }
         ]))
         
@@ -95,7 +95,7 @@ class Test(unittest.TestCase):
                 {'url': 'http://localhost:8080/ga4gh/wes/v1'}
                  
                ,{ 'url': 'http://localhost:8080/ga4gh/wes/v1'
-                , 'inputTemplateParams': { 'a': 1 }
+                , 'inputParams': { 'a': 1 }
                 }
             ])
 

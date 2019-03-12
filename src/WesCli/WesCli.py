@@ -19,7 +19,7 @@ def loadYaml(filename):
 
 def hasTemplateParams(sites):
 
-    has, hasnt = partition(sites, lambda s: 'inputTemplateParams' in s)
+    has, hasnt = partition(sites, lambda s: 'inputParams' in s)
     
     if   len(has)   == len(sites) : return True
     elif len(hasnt) == len(sites) : return False
@@ -33,7 +33,7 @@ def getEffectiveConf(conf):
     
 def replaceVariables(conf):
     
-    inputTemplate   = conf['inputTemplate']
+    inputTemplate   = conf['input']
     sites           = conf['sites']
     
     template = Template(inputTemplate)
@@ -43,7 +43,7 @@ def replaceVariables(conf):
         return {
             
             'url'   : s['url']
-           ,'input' : template.render(s['inputTemplateParams'])
+           ,'input' : template.render(s['inputParams'])
         }
         
     return {

@@ -2,7 +2,7 @@
 
 workflow: 'https://github.com/fgypas/cwl-example-workflows/blob/master/hashsplitter-workflow.cwl'
 
-inputTemplate: '{ "input": {   "class": "File",   "location": "{{input}}" } }'
+input: '{ "input": {   "class": "File",   "location": "{{input}}" } }'
 
 sites: 
     - url: http://localhost:8080/ga4gh/wes/v1

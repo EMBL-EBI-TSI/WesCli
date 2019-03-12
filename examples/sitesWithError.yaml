@@ -2,22 +2,22 @@
 
 workflow: 'https://github.com/fgypas/cwl-example-workflows/blob/master/hashsplitter-workflow.cwl'
 
-inputTemplate: '{ "input": {   "class": "File",   "location": "{{input}}" } }'
+input: '{ "input": {   "class": "File",   "location": "{{input}}" } }'
 
 sites: 
     - url:                  http://localhost:8080/ga4gh/wes/v1
-      inputTemplateParams:  { input: 'file:///tmp/hashSplitterInput/test1.txt' }
+      inputParams:  { input: 'file:///tmp/hashSplitterInput/test1.txt' }
     - url:                  http://localhost:8080/ga4gh/wes/v1
-      inputTemplateParams:  { input: 'file:///tmp/hashSplitterInput/test1.txt' }
+      inputParams:  { input: 'file:///tmp/hashSplitterInput/test1.txt' }
     - url:                  http://localhost:8080/ga4gh/wes/v1
-      inputTemplateParams:  { input: 'file:///tmp/hashSplitterInput/test1.txt' }
+      inputParams:  { input: 'file:///tmp/hashSplitterInput/test1.txt' }
     - url:                  http://localhost:8080/ga4gh/wes/v1
-      inputTemplateParams:  { input: 'file:///tmp/hashSplitterInput/test1.txt' }
+      inputParams:  { input: 'file:///tmp/hashSplitterInput/test1.txt' }
     - url:                  http://localhost:8080/ga4gh/wes/v1
-      inputTemplateParams:  { input: 'file:///tmp/hashSplitterInput/test1.txt' }
+      inputParams:  { input: 'file:///tmp/hashSplitterInput/test1.txt' }
     - url:                  http://localhost:8080/wrong/url                           # <= error here
-      inputTemplateParams:  { input: 'file:///tmp/hashSplitterInput/test2.txt' }
+      inputParams:  { input: 'file:///tmp/hashSplitterInput/test2.txt' }
     - url:                  http://localhost:8080/ga4gh/wes/v1
-      inputTemplateParams:  { input: 'file:///tmp/hashSplitterInput/test1.txt' }
+      inputParams:  { input: 'file:///tmp/hashSplitterInput/test1.txt' }
     - url:                  http://localhost:8080/ga4gh/wes/v1
-      inputTemplateParams:  { input: 'file:///tmp/hashSplitterInput/test1.txt' }
+      inputParams:  { input: 'file:///tmp/hashSplitterInput/test1.txt' }
