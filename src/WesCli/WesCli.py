@@ -23,7 +23,7 @@ def hasTemplateParams(sites):
     
     if   len(has)   == len(sites) : return True
     elif len(hasnt) == len(sites) : return False
-    else                          : raise InvalidConf()
+    else                          : raise InvalidConf("Invalid configuration. Either all sites have 'inputParams' or none should have.")
     
     
 def getEffectiveConf(conf):

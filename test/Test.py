@@ -88,7 +88,7 @@ class Test(unittest.TestCase):
         ]))
 
         # Somebody has => error
-        with self.assertRaises(InvalidConf):
+        with self.assertRaises(InvalidConf) as cm:
              
             hasTemplateParams([
              
@@ -98,6 +98,8 @@ class Test(unittest.TestCase):
                 , 'inputParams': { 'a': 1 }
                 }
             ])
+            
+        print(cm.exception)
 
 
 

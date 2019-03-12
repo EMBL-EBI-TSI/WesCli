@@ -3,9 +3,20 @@
 import sys
 from WesCli.ArgParser import getOpts
 from WesCli.WesCli import run_multiple, status, status_multiple
+from WesCli.exception import UserMessageException
 
 
 def main(args):
+    
+    try:
+        _main(args)
+    
+    except UserMessageException as e:
+        
+        print(e)
+        
+    
+def _main(args):
     
     opts = getOpts(args)
     
