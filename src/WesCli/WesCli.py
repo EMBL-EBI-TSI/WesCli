@@ -1,13 +1,13 @@
 # encoding: utf-8
 
 import yaml
-from jinja2 import Template
 import requests
 from WesCli.either import Ok, Error, Either
-import json
 from WesCli.LocalState import LocalState
 from pydash.collections import partition
 from WesCli.exception import InvalidConf
+from pydash.predicates import is_string
+from pydash.objects import map_values_deep, clone_deep
 
 
 def loadYaml(filename):
@@ -31,19 +31,45 @@ def getEffectiveConf(conf):
     return replaceVariables(conf) if hasTemplateParams(conf['sites']) else conf
     
     
+
+def mapTree(tree, func):
+    '''
+    map_values_deep() mutates the tree.
+    
+    So, I clone it first.
+    '''
+    
+    return map_values_deep(clone_deep(tree), func)
+
+
+def replace(inputTree, params):
+    
+    def isVariable(x):        return is_string(x) and len(x) != 0 and x[0] == '$'
+    
+    def variableValue(name):  return params[name[1:]]  # The 1st char is '$'
+
+    def func(x):
+          
+        if isVariable(x):
+            return variableValue(x)
+        else:       
+            return x
+        
+     
+    return mapTree(inputTree, func)
+
+
 def replaceVariables(conf):
     
-    inputTemplate   = conf['input']
-    sites           = conf['sites']
-    
-    template = Template(inputTemplate)
+    inputTree   = conf['input']
+    sites       = conf['sites']
 
     def renderSite(s):
         
         return {
             
             'url'   : s['url']
-           ,'input' : template.render(s['inputParams'])
+           ,'input' : replace(inputTree, s['inputParams'])
         }
         
     return {

@@ -8,10 +8,10 @@ name = "pypi"
 [packages]
 "e1839a8" = {path = ".", editable = true}
 pyyaml = "*"
-"jinja2" = "*"
 requests = "*"
 docopt = "*"
 pydash = "*"
+funcy = "*"
 
 [requires]
 python_version = "3.6"

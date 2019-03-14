@@ -2,8 +2,7 @@
 
 import unittest
 from pprint import pprint
-from WesCli.WesCli import loadYaml, getEffectiveConf, hasTemplateParams
-from jinja2 import Template
+from WesCli.WesCli import loadYaml, getEffectiveConf, hasTemplateParams, replace
 from WesCli.exception import InvalidConf
 
 
@@ -21,18 +20,30 @@ class Test(unittest.TestCase):
         pprint(yaml)
         
     
-    def test_renderTemplate(self):
+    def test_replace(self):
         
-        template = Template('Hello {{ name }}!')
-        txt = template.render(name='world')
+        inputTree = { 
+            
+            "input": {
+                
+                "class"     : "File"
+               ,"location"  : '$input'
+        }}
         
-        self.assertEquals(txt, 'Hello world!')
+        params = {'input': 'someValue'}
+        
+        self.assertEquals(replace(inputTree, params), { 
+            
+            "input": {
+                
+                "class"     : "File"
+               ,"location"  : 'someValue'
+        }})
 
 
     def test_getEffectiveConf(self):
             '''
-            {'inputTemplate': '{ "input": {   "class": "File",   "location": "{{input}}" } '
-                              '}',
+            {'inputTemplate': { "input": {   "class": "File",   "location": "$input" } },
                               
              'sites': [{'inputTemplateParams': {'input': 'file:///tmp/hashSplitterInput/test1.txt'},
                         'site': 'http://localhost:8080/ga4gh/wes/v1'},
@@ -49,10 +60,10 @@ class Test(unittest.TestCase):
                  'workflow': 'https://github.com/fgypas/cwl-example-workflows/blob/master/hashsplitter-workflow.cwl'
                 
                 ,'sites': [
-                            { 'input' : '{ "input": {   "class": "File",   "location": "file:///tmp/hashSplitterInput/test1.txt" } }'
+                            { 'input' : { "input": {   "class": "File",   "location": "file:///tmp/hashSplitterInput/test1.txt" } }
                             , 'url'   : 'http://localhost:8080/ga4gh/wes/v1'
                             }
-                          , { 'input' : '{ "input": {   "class": "File",   "location": "file:///tmp/hashSplitterInput/test2.txt" } }'
+                          , { 'input' : { "input": {   "class": "File",   "location": "file:///tmp/hashSplitterInput/test2.txt" } }
                             , 'url'   : 'http://localhost:8080/ga4gh/wes/v1'
                             }
                           ]
