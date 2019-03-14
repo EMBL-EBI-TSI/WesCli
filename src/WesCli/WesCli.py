@@ -102,7 +102,7 @@ def run( wesUrl         : str
          ,'workflow_params'         : params   
     })
     
-    if   r.status_code == requests.codes.ok : return Ok(r.json())
+    if   r.status_code == requests.codes.ok : return Ok(r.json())              # @UndefinedVariable
     else                                    : return Error(r.json())
 
 
@@ -110,7 +110,7 @@ def status(wesUrl, id) -> Either:
     
     r = requests.get(f"{wesUrl}/runs/{id}/status")
     
-    if   r.status_code == requests.codes.ok : return Ok(r.json()['state'])
+    if   r.status_code == requests.codes.ok : return Ok(r.json()['state'])     # @UndefinedVariable
     else                                    : return Error(r.text)
 
 
@@ -118,7 +118,7 @@ def info(wesUrl, id):
     
     r = requests.get(f"{wesUrl}/runs/{id}")
     
-    if   r.status_code == requests.codes.ok : return Ok(r.json())
+    if   r.status_code == requests.codes.ok : return Ok(r.json())              # @UndefinedVariable
     else                                    : return Error(r.text)
 
 
