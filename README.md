@@ -1,4 +1,4 @@
-# WES Command Line Client
+# Multi-WES CLI client
 
 ## Instalation
 
