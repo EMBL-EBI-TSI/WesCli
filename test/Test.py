@@ -2,7 +2,7 @@
 
 import unittest
 from pprint import pprint
-from WesCli.WesCli import loadYaml, getEffectiveConf, hasTemplateParams, replace
+from WesCli.WesCli import loadYaml, getEffectiveConf, validateSites, replace
 from WesCli.exception import InvalidConf
 
 
@@ -74,13 +74,23 @@ class Test(unittest.TestCase):
         
         yaml = loadYaml('examples/singleSite.yaml')
         
-        self.assertEqual(getEffectiveConf(yaml), yaml)
+        self.assertEqual(getEffectiveConf(yaml), {
+                
+             'workflow': 'https://github.com/fgypas/cwl-example-workflows/blob/master/hashsplitter-workflow.cwl'
+            
+            ,'sites': [
+                
+                { 'input' : { "input": {   "class": "File",   "location": "file:///tmp/hashSplitterInput/test1.txt" } }
+                , 'url'   : 'http://localhost:8080/ga4gh/wes/v1'
+                }
+            ]
+        })
             
             
     def test_hasTemplateParams(self):
         
         # Everybody has
-        self.assertTrue(hasTemplateParams([
+        validateSites([
              
             { 'url': 'http://localhost:8080/ga4gh/wes/v1'
             , 'inputParams': { 'a': 1 }
@@ -89,19 +99,19 @@ class Test(unittest.TestCase):
            ,{ 'url': 'http://localhost:8080/ga4gh/wes/v1'
             , 'inputParams': { 'a': 2 }
             }
-        ]))
+        ])
         
         # Nobody has
-        self.assertFalse(hasTemplateParams([
+        validateSites([
              
             {'url': 'http://localhost:8080/ga4gh/wes/v1'}
            ,{'url': 'http://localhost:8080/ga4gh/wes/v1'}
-        ]))
+        ])
 
         # Somebody has => error
         with self.assertRaises(InvalidConf) as cm:
              
-            hasTemplateParams([
+            validateSites([
              
                 {'url': 'http://localhost:8080/ga4gh/wes/v1'}
                  

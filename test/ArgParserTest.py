@@ -1,13 +1,9 @@
 import unittest
 from WesCli.ArgParser import getOpts
+from AssertKeyValueMixin import AssertKeyValueMixin
 
 
-class ArgParserTest(unittest.TestCase):
-
-    def assertKeyValue(self, args, key, value):
-        
-        return self.assertEquals(args[key], value)
-
+class ArgParserTest(unittest.TestCase, AssertKeyValueMixin):
 
     def test_run(self):
         

@@ -5,7 +5,7 @@ workflow: 'https://github.com/fgypas/cwl-example-workflows/blob/master/hashsplit
 input:
   input:
     class: File
-    location: $input
+    location: file:///tmp/hashSplitterInput/test1.txt
 
 sites: 
     - url: http://localhost:8080/ga4gh/wes/v1

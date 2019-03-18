@@ -3,15 +3,22 @@
 import unittest
 from WesCli.WesCli import run, run_multiple, status, info, status_multiple
 from WesCli.either import Ok, Error
+from AssertKeyValueMixin import AssertKeyValueMixin
 
 
-class IntegrationTest(unittest.TestCase):
+class IntegrationTest(unittest.TestCase, AssertKeyValueMixin):
     
+        
+    def setUp(self):
+        
+        self.maxDiff = None                 # Diff is 709 characters long. Set self.maxDiff to None to see it.
+    
+
     def test_run_success(self):
         
         r = run( 'http://localhost:8080/ga4gh/wes/v1'
                , 'https://github.com/fgypas/cwl-example-workflows/blob/master/hashsplitter-workflow.cwl'
-               , '{ "input": {   "class": "File",   "location": "file:///tmp/hashSplitterInput/test.txt" } }'
+               , { "input": {   "class": "File",   "location": "file:///tmp/hashSplitterInput/test.txt" } }
                )
         
         print(r)   # Ok({'run_id': 'S28J1E'})
@@ -36,9 +43,24 @@ class IntegrationTest(unittest.TestCase):
 
     def test_run_multiple(self):
         
-        run_multiple('examples/sitesWithError.yaml')
+        sites = run_multiple('examples/sitesWithError.yaml')
         
+        self.assertGreater(len(sites), 1)
 
+
+    def test_run_single(self):
+        
+        sites = run_multiple('examples/singleSite.yaml')
+        
+        self.assertTrue(len(sites) == 1)
+        
+        r = sites[0]
+        
+        self.assertKeyValue(r, 'url', 'http://localhost:8080/ga4gh/wes/v1')
+        self.assertKeyValue(r, 'ok' , True)
+        self.assertIsNotNone(r.get('id'))
+            
+            
     def test_status_multiple(self):
         
         print('-- run examples/sitesWithError.yaml ---------------------------------------')
@@ -55,7 +77,7 @@ class IntegrationTest(unittest.TestCase):
         
         r = run( url
                , 'https://github.com/fgypas/cwl-example-workflows/blob/master/hashsplitter-workflow.cwl'
-               , '{ "input": {   "class": "File",   "location": "file:///tmp/hashSplitterInput/test.txt" } }'
+               , { "input": {   "class": "File",   "location": "file:///tmp/hashSplitterInput/test.txt" } }
                )
         
         print(r)                                    # Ok({'run_id': 'S28J1E'})

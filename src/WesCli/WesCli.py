@@ -8,6 +8,8 @@ from pydash.collections import partition
 from WesCli.exception import InvalidConf
 from pydash.predicates import is_string
 from pydash.objects import map_values_deep, clone_deep
+from typing import Optional
+import json
 
 
 def loadYaml(filename):
@@ -17,21 +19,23 @@ def loadYaml(filename):
         return yaml.safe_load(f)
 
 
-def hasTemplateParams(sites):
+def validateSites(sites):
 
     has, hasnt = partition(sites, lambda s: 'inputParams' in s)
     
-    if   len(has)   == len(sites) : return True
-    elif len(hasnt) == len(sites) : return False
-    else                          : raise InvalidConf("Invalid configuration. Either all sites have 'inputParams' or none should have.")
+    ok = len(has)   == len(sites) or \
+         len(hasnt) == len(sites)
+    
+    if not ok: raise InvalidConf("Invalid configuration. Either all sites have 'inputParams' or none should have.")
     
     
 def getEffectiveConf(conf):
     
-    return replaceVariables(conf) if hasTemplateParams(conf['sites']) else conf
+    validateSites(conf['sites'])
+    
+    return replaceVariables(conf)
     
     
-
 def mapTree(tree, func):
     '''
     map_values_deep() mutates the tree.
@@ -66,10 +70,12 @@ def replaceVariables(conf):
 
     def renderSite(s):
         
+        inputParams = s.get('inputParams')
+        
         return {
             
             'url'   : s['url']
-           ,'input' : replace(inputTree, s['inputParams'])
+           ,'input' : replace(inputTree, inputParams) if inputParams else inputTree
         }
         
     return {
@@ -81,7 +87,7 @@ def replaceVariables(conf):
 
 def run( wesUrl         : str
        , workflowUrl    : str
-       , params         : str):
+       , params         : dict):
     
     '''
         curl -iv -X POST                                    \
@@ -99,7 +105,7 @@ def run( wesUrl         : str
           'workflow_type'           : 'cwl'         
          ,'workflow_type_version'   : 'v1.0'        
          ,'workflow_url'            : workflowUrl
-         ,'workflow_params'         : params   
+         ,'workflow_params'         : json.dumps(params)   
     })
     
     if   r.status_code == requests.codes.ok : return Ok(r.json())              # @UndefinedVariable
@@ -153,6 +159,9 @@ def run_multiple(yamlFilename):
         
         localState.add(url, r)  # , inputTemplateParams    # TODO?
         localState.save()
+    
+        
+    return localState.sites
 
 
 def formatOutputs(outputs):
