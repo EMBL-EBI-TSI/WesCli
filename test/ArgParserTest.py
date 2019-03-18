@@ -18,8 +18,8 @@ class ArgParserTest(unittest.TestCase, AssertKeyValueMixin):
         
         self.assertKeyValue(args, 'run'         , True)
         self.assertKeyValue(args, '<runSpec>'   , 'sites.yaml')
-        
 
+        
     def test_status(self):
         
         args = getOpts(['status'])
@@ -33,6 +33,23 @@ class ArgParserTest(unittest.TestCase, AssertKeyValueMixin):
         '''
         
         self.assertKeyValue(args, 'status', True)
+
+
+    def test_ls(self):
+        
+        args = getOpts(['ls', 'https://tes.tsi.ebi.ac.uk/data/tmp/'])
+    
+        print(args)
+        
+        '''
+        'ls': True,
+        '<url>': 'https://tes.tsi.ebi.ac.uk/data/tmp/',
+        '''
+        
+        self.assertKeyValue(args, 'ls'      , True)
+        self.assertKeyValue(args, '<url>'   , 'https://tes.tsi.ebi.ac.uk/data/tmp/')
+        
+
         
 
 

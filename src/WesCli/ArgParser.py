@@ -17,6 +17,8 @@ def getOpts(args):
 Usage:
     wes run <runSpec>
     wes status
+    wes ls <url>
+    
 
 
 Options:
