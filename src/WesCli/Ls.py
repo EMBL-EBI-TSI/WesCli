@@ -27,6 +27,11 @@ def formatEntry(e: DirEntry):
     return e['Name'] + maybeSlash
 
 
+def printDir(entries : [DirEntry]):
+    
+    print('\n'.join([formatEntry(e) for e in entries]))
+
+
 def ls(wesUrl) -> [DirEntry]:
     '''
     $ curl -H 'Accept: application/json' https://tes.tsi.ebi.ac.uk/data/tmp/ | json_pp 
@@ -74,12 +79,8 @@ def ls(wesUrl) -> [DirEntry]:
         raise UserMessageException(r.text)
     
 
-    return r.json()
+    contentType = r.headers['Content-Type']
     
+    if contentType.startswith('application/json')   : printDir(r.json()) 
+    else                                            : print(r.text)
     
-def cmd(url):
-    
-    entries = ls(url)
-    
-    print('\n'.join([formatEntry(e) for e in entries]))
-
