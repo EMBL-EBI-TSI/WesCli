@@ -18,7 +18,7 @@ Usage:
     wes run <runSpec>
     wes status
     wes get <url>
-    
+    wes upload <url> <filename>
 
 
 Options:

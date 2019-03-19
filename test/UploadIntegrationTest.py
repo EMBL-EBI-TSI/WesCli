@@ -2,6 +2,7 @@
 
 import unittest
 from WesCli.Upload import upload
+from WesCli.Main import main
 
 
 class UploadIntegrationTest(unittest.TestCase):
@@ -12,6 +13,12 @@ class UploadIntegrationTest(unittest.TestCase):
         '''
         
         upload('https://tes.tsi.ebi.ac.uk/data/tmp/', 'test/resources/Hello.txt')
+        
+
+    def test_upload_cmd_line(self):
+        
+        main(['upload', 'https://tes.tsi.ebi.ac.uk/data/tmp/', 'test/resources/Hello.txt'])
+
 
 
 
