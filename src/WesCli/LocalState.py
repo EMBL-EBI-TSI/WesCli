@@ -2,6 +2,8 @@
 
 import json
 from WesCli.either import Either
+import os
+from WesCli.exception import UserMessageException
 
 
 DOT_FILE = '.wes'
@@ -49,6 +51,11 @@ class LocalState(object):
         
             
     def load(self):
+        
+        if not os.path.exists(DOT_FILE):
+            
+            raise UserMessageException("Local state file not found. Have you ran 'wes run' before?")
+        
             
         with open(DOT_FILE) as f:
         

@@ -4,9 +4,14 @@ import unittest
 from WesCli.WesCli import run, run_multiple, status, info, status_multiple
 from WesCli.either import Ok, Error
 from AssertKeyValueMixin import AssertKeyValueMixin
+import os
+from WesCli import LocalState
+from WesCli.LocalState import DOT_FILE
+from AssertThrowsMixin import AssertThrowsMixin
+from WesCli.exception import UserMessageException
 
 
-class IntegrationTest(unittest.TestCase, AssertKeyValueMixin):
+class IntegrationTest(unittest.TestCase, AssertKeyValueMixin, AssertThrowsMixin):
     
         
     def setUp(self):
@@ -69,8 +74,19 @@ class IntegrationTest(unittest.TestCase, AssertKeyValueMixin):
         print()
         print('-- status_multiple() ------------------------------------------------------')
         status_multiple()
-        
 
+        
+    def test_status_without_run(self):
+        
+        if os.path.exists(DOT_FILE): 
+            os.remove(DOT_FILE)
+        
+        self.assertThrows( status_multiple
+                         , UserMessageException
+                         , "Local state file not found. Have you ran 'wes run' before?"
+                         )
+        
+        
     def test_status_and_info(self):
         
         url = 'http://localhost:8080/ga4gh/wes/v1'
