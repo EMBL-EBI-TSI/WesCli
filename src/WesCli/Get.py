@@ -32,7 +32,7 @@ def printDir(entries : [DirEntry]):
     print('\n'.join([formatEntry(e) for e in entries]))
 
 
-def ls(wesUrl) -> [DirEntry]:
+def get(wesUrl):
     '''
     $ curl -H 'Accept: application/json' https://tes.tsi.ebi.ac.uk/data/tmp/ | json_pp 
     

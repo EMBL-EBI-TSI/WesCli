@@ -37,16 +37,16 @@ class ArgParserTest(unittest.TestCase, AssertKeyValueMixin):
 
     def test_ls(self):
         
-        args = getOpts(['ls', 'https://tes.tsi.ebi.ac.uk/data/tmp/'])
+        args = getOpts(['get', 'https://tes.tsi.ebi.ac.uk/data/tmp/'])
     
         print(args)
         
         '''
-        'ls': True,
+        'get': True,
         '<url>': 'https://tes.tsi.ebi.ac.uk/data/tmp/',
         '''
         
-        self.assertKeyValue(args, 'ls'      , True)
+        self.assertKeyValue(args, 'get'     , True)
         self.assertKeyValue(args, '<url>'   , 'https://tes.tsi.ebi.ac.uk/data/tmp/')
         
 

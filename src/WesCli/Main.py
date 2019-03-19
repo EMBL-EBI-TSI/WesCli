@@ -2,10 +2,9 @@
 
 import sys
 from WesCli.ArgParser import getOpts
-from WesCli.WesCli import run_multiple, status, status_multiple
+from WesCli.WesCli import run_multiple, status_multiple
 from WesCli.exception import UserMessageException
-from WesCli import Ls
-from WesCli.Ls import ls
+from WesCli.Get import get
 
 
 def main(args):
@@ -26,7 +25,7 @@ def _main(args):
     
     if   opts['run']    :    run_multiple(opts['<runSpec>'])
     elif opts['status'] :    status_multiple()
-    elif opts['ls']     :    ls(opts['<url>'])
+    elif opts['get']    :    get(opts['<url>'])
     
     
         

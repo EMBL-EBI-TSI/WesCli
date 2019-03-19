@@ -4,19 +4,19 @@ import unittest
 from WesCli.Main import main
 
 
-class LsIntegrationTest(unittest.TestCase):
+class GetIntegrationTest(unittest.TestCase):
     
-    def test_ls_dir(self):
+    def test_get_dir(self):
         '''
         wes ls https://tes.tsi.ebi.ac.uk/data/tmp/
         '''
         
-        main(['ls', 'https://tes.tsi.ebi.ac.uk/data/tmp/'])
+        main(['get', 'https://tes.tsi.ebi.ac.uk/data/tmp/'])
         
         
-    def test_ls_file(self):
+    def test_get_file(self):
         
-        main(['ls', 'https://tes.tsi.ebi.ac.uk/data/tmp/ZE4HDH/tmpo387m8k8/md5'])
+        main(['get', 'https://tes.tsi.ebi.ac.uk/data/tmp/ZE4HDH/tmpo387m8k8/md5'])
         
 
 
