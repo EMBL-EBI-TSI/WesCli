@@ -8,7 +8,7 @@ def upload(url, filename):
         r = requests.post( url, files = {'file': f} )
     
     
-    print(r)
+#     print(r)
      
     r.raise_for_status()
     

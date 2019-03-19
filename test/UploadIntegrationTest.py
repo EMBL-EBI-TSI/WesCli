@@ -20,6 +20,11 @@ class UploadIntegrationTest(unittest.TestCase):
         main(['upload', 'https://tes.tsi.ebi.ac.uk/data/tmp/', 'test/resources/Hello.txt'])
 
 
+    def test_nice_error_message(self):
+        
+        main(['upload', 'https://tes.tsi.ebi.ac.uk/data/', 'test/resources/Hello.txt'])
+
+
 
 
 if __name__ == "__main__":

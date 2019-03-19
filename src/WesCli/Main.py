@@ -13,7 +13,7 @@ def main(args):
     try:
         _main(args)
     
-    except UserMessageException as e:
+    except Exception as e:
         
         print(e)
         
