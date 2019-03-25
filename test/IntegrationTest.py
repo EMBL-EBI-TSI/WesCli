@@ -44,6 +44,33 @@ class IntegrationTest(unittest.TestCase, AssertKeyValueMixin, AssertThrowsMixin)
         self.assertEquals(type(r), Error)
         self.assertTrue('msg'           in r.v)
         self.assertTrue('status_code'   in r.v)
+
+        
+    def _test_run_failure_500(self):
+        '''
+        One day the cluster was not working and always returned this:
+        
+            500
+    
+            Body:
+               <title>amqp.exceptions.NotFound: Queue.declare: (404) NOT_FOUND - home node 'rabbit@172.16.32.248' of durable queue 'celery' in vhost '/' is down or inaccessible // Werkzeug Debugger</title>
+               (...) # Huge HTML
+
+               
+        -- and the client blew up.
+        It was trying to convert the HTML to JSON.
+        '''
+        
+        r = run( 'https://tes.tsi.ebi.ac.uk/ga4gh/wes/v1'
+               , 'https://github.com/fgypas/cwl-example-workflows/blob/master/hashsplitter-workflow.cwl'
+               , { "input": {   "class": "File",   "location": "file:///tmp/hashSplitterInput/test.txt" } }
+               )
+        
+        print(r)   # Error({'status_code': 500, 'msg': 'INTERNAL SERVER ERROR'})
+        
+        self.assertEquals(type(r), Error)
+        self.assertTrue('msg'           in r.v)
+        self.assertTrue('status_code'   in r.v)
         
 
     def test_run_multiple(self):

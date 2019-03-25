@@ -85,6 +85,21 @@ def replaceVariables(conf):
     }
 
 
+def toJson(r):
+    
+    try:
+        
+        return r.json()
+    
+    except:
+        
+        return {
+            
+            'status_code'   : r.status_code
+           ,'msg'           : r.reason
+        }
+    
+
 def run( wesUrl         : str
        , workflowUrl    : str
        , params         : dict):
@@ -109,7 +124,7 @@ def run( wesUrl         : str
     })
     
     if   r.status_code == requests.codes.ok : return Ok(r.json())              # @UndefinedVariable
-    else                                    : return Error(r.json())
+    else                                    : return Error(toJson(r))
 
 
 def status(wesUrl, id) -> Either:
