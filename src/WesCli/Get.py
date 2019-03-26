@@ -1,6 +1,9 @@
 from mypy_extensions import TypedDict
 import requests
 from WesCli.exception import UserMessageException
+from urllib.parse import urlsplit
+from pprint import pprint
+import os
 
 
 
@@ -27,9 +30,43 @@ def formatEntry(e: DirEntry):
     return e['Name'] + maybeSlash
 
 
-def printDir(entries : [DirEntry]):
+def getPath(url):
     
-    print('\n'.join([formatEntry(e) for e in entries]))
+    return urlsplit(url).path
+
+
+def newFormatLine(wesUrl):
+    
+    basePath = getPath(wesUrl)
+    
+    def fileUrl(filename):
+        
+        return f"file:/{os.path.join(basePath, filename)}"
+
+
+    def formatLine(e):
+    
+        filename = formatEntry(e)
+        
+        return f'{filename: <30} ({fileUrl(filename)})'
+    
+    
+    return formatLine
+
+
+def printDir(entries : [DirEntry], wesUrl):
+    '''
+    $ wes get https://tes.tsi.ebi.ac.uk/data/tmp/0PR0GE/
+    
+    tmp2ri6hb_r/        (file://data/tmp/0PR0GE/tmp2ri6hb_r/)
+    tmp6awdshnf/        (file://data/tmp/0PR0GE/tmp.../)
+    tmp_a_c9ltp/        (file://data/tmp/0PR0GE/tmp.../)
+    tmppeev59oa/        (file://data/tmp/0PR0GE/tmp.../)
+    '''
+    
+    formatLine = newFormatLine(wesUrl)
+    
+    print('\n'.join([formatLine(e) for e in entries]))
 
 
 def get(wesUrl):
@@ -81,6 +118,6 @@ def get(wesUrl):
 
     contentType = r.headers['Content-Type']
     
-    if contentType.startswith('application/json')   : printDir(r.json()) 
+    if contentType.startswith('application/json')   : printDir(r.json(), wesUrl) 
     else                                            : print(r.text)
     
