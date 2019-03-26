@@ -11,6 +11,11 @@ from AssertThrowsMixin import AssertThrowsMixin
 from WesCli.exception import UserMessageException
 
 
+
+WES_URL = 'http://localhost:8080/ga4gh/wes/v1'
+# WES_URL = 'https://tes.tsi.ebi.ac.uk/ga4gh/wes/v1'
+
+
 class IntegrationTest(unittest.TestCase, AssertKeyValueMixin, AssertThrowsMixin):
     
         
@@ -21,7 +26,7 @@ class IntegrationTest(unittest.TestCase, AssertKeyValueMixin, AssertThrowsMixin)
 
     def test_run_success(self):
         
-        r = run( 'http://localhost:8080/ga4gh/wes/v1'
+        r = run( WES_URL
                , 'https://github.com/fgypas/cwl-example-workflows/blob/master/hashsplitter-workflow.cwl'
                , { "input": {   "class": "File",   "location": "file:///tmp/hashSplitterInput/test.txt" } }
                )
@@ -34,7 +39,7 @@ class IntegrationTest(unittest.TestCase, AssertKeyValueMixin, AssertThrowsMixin)
 
     def test_run_failure(self):
         
-        r = run( 'http://localhost:8080/ga4gh/wes/v1'
+        r = run( WES_URL
                , 'https://github.com/fgypas/cwl-example-workflows/blob/master/hashsplitter-workflow.cwl'
                , '{ "input": {   "class": "File",   "location": "file:///tmp/hashSplitterInput/test.txt"  }'  # <= removed one '}' :)
                )
@@ -116,7 +121,7 @@ class IntegrationTest(unittest.TestCase, AssertKeyValueMixin, AssertThrowsMixin)
         
     def test_status_and_info(self):
         
-        url = 'http://localhost:8080/ga4gh/wes/v1'
+        url = WES_URL
         
         r = run( url
                , 'https://github.com/fgypas/cwl-example-workflows/blob/master/hashsplitter-workflow.cwl'
