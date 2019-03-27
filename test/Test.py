@@ -2,8 +2,10 @@
 
 import unittest
 from pprint import pprint
-from WesCli.WesCli import loadYaml, getEffectiveConf, validateSites, replace
+from WesCli.WesCli import loadYaml, getEffectiveConf, validateSites, replace,\
+    statusLine
 from WesCli.exception import InvalidConf
+from WesCli.either import Ok
 
 
 class Test(unittest.TestCase):
@@ -121,6 +123,42 @@ class Test(unittest.TestCase):
             ])
             
         print(cm.exception)
+        
+    def test_statusLine(self):
+        '''
+        {
+            'outputs': {'output': {'basename': 'unify',
+                        'checksum': 'sha1$4933476da50795db219640556d5cc613ca3804e1',
+                        'class': 'File',
+                        'location': 'file:///data/tmp/7GOLQ0/tmphay73miu/unify',
+                        'path': '/data/tmp/7GOLQ0/tmphay73miu/unify',
+                        'size': 413}}
+
+           ,'state': 'COMPLETE'
+        }
+
+        => https://tes.tsi.ebi.ac.uk/ga4gh/wes/v1  7GOLQ0  COMPLETE  {'output': '/data/tmp/7GOLQ0/tmphay73miu/unify'}
+        '''
+
+        url = 'https://tes.tsi.ebi.ac.uk/ga4gh/wes/v1'
+        id  = '7GOLQ0'
+        
+        self.assertEquals(
+                    
+            statusLine(url, id, Ok({
+                
+                'outputs': {'output': {'basename': 'unify',
+                            'checksum': 'sha1$4933476da50795db219640556d5cc613ca3804e1',
+                            'class': 'File',
+                            'location': 'file:///data/tmp/7GOLQ0/tmphay73miu/unify',
+                            'path': '/data/tmp/7GOLQ0/tmphay73miu/unify',
+                            'size': 413}}
+    
+               ,'state': 'COMPLETE'
+            }))
+            
+            , "https://tes.tsi.ebi.ac.uk/ga4gh/wes/v1  7GOLQ0  COMPLETE  {'output': '/data/tmp/7GOLQ0/tmphay73miu/unify'}"
+        )
 
 
 

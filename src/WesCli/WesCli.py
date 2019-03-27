@@ -10,6 +10,7 @@ from pydash.predicates import is_string
 from pydash.objects import map_values_deep, clone_deep
 from typing import Optional
 import json
+from pprint import pprint
 
 
 def loadYaml(filename):
@@ -196,6 +197,14 @@ def formatOutputs(outputs):
     return { name: o['path'] for (name, o) in outputs.items() }
 
 
+def statusLine(url, id, st):
+    
+    state       = st.v['state']                     if st.isOk() else ''
+    outputs     = formatOutputs(st.v['outputs'])    if st.isOk() else ''
+    
+    return f"{url}  {id}  {state}  {outputs}"
+
+
 def status_multiple():
     
     s = LocalState('')
@@ -218,12 +227,16 @@ def status_multiple():
     
     for site in successes:
         
-        st = info(site['url'], site['id'])
+        url = site['url']
+        id = site['id']
         
-        state   = st.v['state']                     if st.isOk() else ''
-        outputs = formatOutputs(st.v['outputs'])    if st.isOk() else ''
+        st = info(url, id)
         
-        print(f"{site['url']}  {site['id']}  {state}  {outputs}")
+#        pprint(st.v)   # DEBUG
+        
+        s = statusLine(url, id, st)
+        
+        print(s)
         
     print()
     print('Failures:')
