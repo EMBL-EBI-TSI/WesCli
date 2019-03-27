@@ -1,9 +1,8 @@
 from mypy_extensions import TypedDict
 import requests
 from WesCli.exception import UserMessageException
-from urllib.parse import urlsplit
-from pprint import pprint
 import os
+from WesCli.url import getPath
 
 
 
@@ -28,11 +27,6 @@ def formatEntry(e: DirEntry):
     maybeSlash = '/' if e['IsDir'] else ''
     
     return e['Name'] + maybeSlash
-
-
-def getPath(url):
-    
-    return urlsplit(url).path
 
 
 def newFormatLine(wesUrl):

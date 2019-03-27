@@ -11,6 +11,10 @@ from pydash.objects import map_values_deep, clone_deep
 from typing import Optional
 import json
 from pprint import pprint
+from urllib.parse import urlsplit, urljoin
+import os
+from WesCli import url
+from WesCli.url import getBaseUrl
 
 
 def loadYaml(filename):
@@ -180,7 +184,7 @@ def run_multiple(yamlFilename):
     return localState.sites
 
 
-def formatOutputs(outputs):
+def formatOutputs(outputsBaseUrl, outputs):
     '''
     {
       "output": {
@@ -194,13 +198,20 @@ def formatOutputs(outputs):
     }
     '''
     
-    return { name: o['path'] for (name, o) in outputs.items() }
+    def outputUrl(o):
+        
+        return urljoin(outputsBaseUrl, o['path'])
+
+
+    return { name: outputUrl(o) for (name, o) in outputs.items() }
 
 
 def statusLine(url, id, st):
     
-    state       = st.v['state']                     if st.isOk() else ''
-    outputs     = formatOutputs(st.v['outputs'])    if st.isOk() else ''
+    outputsBaseUrl = getBaseUrl(url)
+    
+    state       = st.v['state']                                     if st.isOk() else None
+    outputs     = formatOutputs(outputsBaseUrl, st.v['outputs'])    if st.isOk() else None
     
     return '  '.join([str(x) for x in [url, id, state, outputs] if x])    # filter out the falsy ones (e.g. {}) and join the rest.
 

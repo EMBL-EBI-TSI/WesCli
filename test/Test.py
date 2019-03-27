@@ -157,7 +157,7 @@ class Test(unittest.TestCase):
                ,'state': 'COMPLETE'
             }))
             
-            , "https://tes.tsi.ebi.ac.uk/ga4gh/wes/v1  7GOLQ0  COMPLETE  {'output': '/data/tmp/7GOLQ0/tmphay73miu/unify'}"
+            , "https://tes.tsi.ebi.ac.uk/ga4gh/wes/v1  7GOLQ0  COMPLETE  {'output': 'https://tes.tsi.ebi.ac.uk/data/tmp/7GOLQ0/tmphay73miu/unify'}"
         )
 
 
