@@ -16,7 +16,7 @@ def getOpts(args):
     doc = """
 Usage:
     wes run <runSpec>
-    wes status
+    wes status [-w|--watch]
     wes get <url>
     wes upload <url> <filename>
 
@@ -29,6 +29,17 @@ Options:
     
     
     return docopt(doc, argv=args)
+    
+    
+def hasWatch(args):
+    '''
+    {'--watch': True,
+     '-w': False,
+     'status': True}
+    '''
+
+    return args.get('--watch') or \
+           args.get('-w')
     
     
 

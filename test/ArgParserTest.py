@@ -1,5 +1,5 @@
 import unittest
-from WesCli.ArgParser import getOpts
+from WesCli.ArgParser import getOpts, hasWatch
 from AssertKeyValueMixin import AssertKeyValueMixin
 
 
@@ -33,6 +33,27 @@ class ArgParserTest(unittest.TestCase, AssertKeyValueMixin):
         '''
         
         self.assertKeyValue(args, 'status', True)
+
+
+    def test_status_watch(self):
+        
+        args = getOpts(['status', '--watch'])
+    
+        print(args)
+        
+        '''
+        {'--watch': True,
+         '-w': False,
+         'status': True}
+        '''
+        
+        self.assertKeyValue(args, 'status' , True)
+        self.assertTrue(hasWatch(args))
+        
+        self.assertTrue  ( hasWatch( getOpts(['status', '--watch'])   ))
+        self.assertTrue  ( hasWatch( getOpts(['status', '-w'])        ))
+        
+        self.assertFalse ( hasWatch( getOpts(['status'])              ))
 
 
     def test_ls(self):
