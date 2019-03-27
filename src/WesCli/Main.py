@@ -1,11 +1,12 @@
 # encoding: utf-8
 
 import sys
-from WesCli.ArgParser import getOpts
+from WesCli.ArgParser import getOpts, hasWatch
 from WesCli.WesCli import run_multiple, status_multiple
 from WesCli.exception import UserMessageException
 from WesCli.Get import get
 from WesCli.Upload import upload
+import os
 
 
 def main(args):
@@ -25,10 +26,14 @@ def _main(args):
 #     print(opts)
     
     if   opts['run']    :    run_multiple(opts['<runSpec>'])
-    elif opts['status'] :    status_multiple()
     elif opts['get']    :    get(opts['<url>'])
     elif opts['upload'] :    upload(opts['<url>'], opts['<filename>'])
     
+    elif opts['status'] :    
+        
+        if hasWatch(opts) : os.system('watch -n 1 -d wes status')
+        else              : status_multiple()
+            
     
         
 
