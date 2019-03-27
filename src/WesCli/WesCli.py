@@ -249,12 +249,15 @@ def status_multiple():
         
         print(s)
         
-    print()
-    print('Failures:')
+    
+    if failures:
         
-    for site in failures:
-        
-        print(f"{site['url']}  {site['error']}")
+        print()
+        print('Failures:')
+            
+        for site in failures:
+            
+            print(f"{site['url']}  {site['error']}")
         
     
     
