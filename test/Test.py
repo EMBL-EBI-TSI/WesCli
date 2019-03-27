@@ -161,6 +161,29 @@ class Test(unittest.TestCase):
         )
 
 
+    def test_statusLine_no_outputs(self):
+        '''
+        {
+           'outputs': {}
+          ,'state': 'RUNNING'
+        }
+        '''
+
+        url = 'https://tes.tsi.ebi.ac.uk/ga4gh/wes/v1'
+        id  = '7GOLQ0'
+        
+        self.assertEquals(
+                    
+            statusLine(url, id, Ok({
+                
+                'outputs'   : {}
+               ,'state'     : 'RUNNING'
+            }))
+            
+            , "https://tes.tsi.ebi.ac.uk/ga4gh/wes/v1  7GOLQ0  RUNNING"
+        )
+
+
 
 
 

@@ -202,7 +202,7 @@ def statusLine(url, id, st):
     state       = st.v['state']                     if st.isOk() else ''
     outputs     = formatOutputs(st.v['outputs'])    if st.isOk() else ''
     
-    return f"{url}  {id}  {state}  {outputs}"
+    return '  '.join([str(x) for x in [url, id, state, outputs] if x])    # filter out the falsy ones (e.g. {}) and join the rest.
 
 
 def status_multiple():
