@@ -72,3 +72,61 @@ wes status --watch
     ```
     wes upload https://tes.tsi.ebi.ac.uk/data/tmp/ README.md
     ```
+
+### Run spec file
+
+The argument to `wes run` must be a yaml file with a specific format. You can find some examples [here](examples/).
+
+You can:
+
+* Run a workflow on a single site:
+
+    ```yaml
+    workflow: 'https://github.com/fgypas/cwl-example-workflows/blob/master/hashsplitter-workflow.cwl'
+
+    input:
+      input:
+        class: File
+        location: file:///data/tmp/README.md
+
+    sites:
+        - url: https://tes.tsi.ebi.ac.uk/ga4gh/wes/v1
+    ```
+
+* Run a workflow on multiple sites, with the same input:
+
+    Just add more items to `sites`:
+
+    ```yaml
+    workflow: 'https://github.com/fgypas/cwl-example-workflows/blob/master/hashsplitter-workflow.cwl'
+
+    input:
+      input:
+        class: File
+        location: file:///data/tmp/README.md
+
+    sites:
+        - url: https://tes1.tsi.ebi.ac.uk/ga4gh/wes/v1
+        - url: https://tes2.tsi.ebi.ac.uk/ga4gh/wes/v1
+        - url: https://tes3.tsi.ebi.ac.uk/ga4gh/wes/v1
+    ```
+
+* Run a workflow on multiple sites, with the different inputs:
+
+    ```yaml
+    workflow: 'https://github.com/fgypas/cwl-example-workflows/blob/master/hashsplitter-workflow.cwl'
+
+    input:
+      input:
+        class: File
+        location: $input
+
+    sites:
+        - url:          http://localhost:8080/ga4gh/wes/v1
+          inputParams:  { input: 'file:///tmp/hashSplitterInput/test1.txt' }
+        - url:          http://localhost:8080/ga4gh/wes/v1
+          inputParams:  { input: 'file:///tmp/hashSplitterInput/test2.txt' }
+    ```
+
+    Notice that the value of `location` was replaced by `$input`.  
+    `$input` is a _variable_ -- the value of which must be provided for each site in the `inputParams` attribute.
