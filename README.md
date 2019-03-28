@@ -20,9 +20,10 @@
     ```
     (or: edit `./install` and run it)
 
-5. `status --watch` requires `watch` to be installed:
+5. `status --watch` requires [`watch`](https://en.wikipedia.org/wiki/Watch_(Unix)) to be installed.  
+   You might already have it. Just check with:
     ```
-    sudo apt-get install watch
+    which watch
     ```
 
 ## Usage and examples
