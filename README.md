@@ -31,7 +31,7 @@ Here's what you can do so far:
 
 * Run a workflow on a single site:
 ```
-wes run examples/singleSite.yaml
+wes run examples/singleSite_real_cluster.yaml
 ```
 
 * Run a workflow on a multiple sites:
