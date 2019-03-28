@@ -20,6 +20,11 @@
     ```
     (or: edit `./install` and run it)
 
+5. `status --watch` requires `watch` to be installed:
+    ```
+    sudo apt-get install watch
+    ```
+
 ## Usage and examples
 
 Here's what you can do so far:
@@ -38,3 +43,31 @@ wes run examples/sites.yaml
 ```
 wes status
 ```
+
+* Watch the status of all currently running workflows:
+```
+wes status --watch
+```
+
+### Workspace operations
+
+* Browse the workspace:
+
+    ```
+    $ wes get https://tes.tsi.ebi.ac.uk/data/tmp/
+    YO15EZ/                        (file://data/tmp/YO15EZ/)
+    Z9BNOH/                        (file://data/tmp/Z9BNOH/)
+    ZE4HDH/                        (file://data/tmp/ZE4HDH/)
+    evil.json                      (file://data/tmp/evil.json)
+    Hello.txt                      (file://data/tmp/Hello.txt)
+    ```
+
+* Get the contents of a file:
+    ```
+    $ wes get https://tes.tsi.ebi.ac.uk/data/tmp/Hello.txt
+    Hello, world!
+    ```
+* Upload a file:
+    ```
+    wes upload https://tes.tsi.ebi.ac.uk/data/tmp/ README.md
+    ```
