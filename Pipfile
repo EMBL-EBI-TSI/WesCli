@@ -13,7 +13,6 @@ docopt = "*"
 pydash = "*"
 funcy = "*"
 mypy = "*"
-pytype = "*"
 
 [requires]
 python_version = "3.6"
