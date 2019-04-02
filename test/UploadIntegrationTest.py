@@ -3,6 +3,15 @@
 import unittest
 from WesCli.Upload import upload
 from WesCli.Main import main
+from urllib.parse import urljoin
+from uuid import uuid4
+from WesCli.Get import _get
+
+
+
+def randomSubDir():
+    
+    return f'https://tes.tsi.ebi.ac.uk/data/tmp/subDirTest/{uuid4()}/'
 
 
 class UploadIntegrationTest(unittest.TestCase):
@@ -18,6 +27,27 @@ class UploadIntegrationTest(unittest.TestCase):
     def test_upload_cmd_line(self):
         
         main(['upload', 'https://tes.tsi.ebi.ac.uk/data/tmp/', 'test/resources/Hello.txt'])
+
+
+    def test_upload_to_subdir_with_different_name(self):
+        
+        dirUrl = randomSubDir()
+        fileUrl = urljoin(dirUrl, 'Hello2.txt')
+        
+        upload(fileUrl, 'test/resources/Hello.txt')
+        
+        self.assertEquals(_get(fileUrl).text, 'Hello, world!')
+        
+        
+    def test_upload_to_subdir(self):
+        
+        dirUrl = randomSubDir()
+        
+        upload(dirUrl, 'test/resources/Hello.txt')
+        
+        fileUrl = urljoin(dirUrl, 'Hello.txt')
+        
+        self.assertEquals(_get(fileUrl).text, 'Hello, world!')
 
 
     def test_nice_error_message(self):

@@ -63,7 +63,7 @@ def printDir(entries : [DirEntry], wesUrl):
     print('\n'.join([formatLine(e) for e in entries]))
 
 
-def get(wesUrl):
+def _get(wesUrl):
     '''
     $ curl -H 'Accept: application/json' https://tes.tsi.ebi.ac.uk/data/tmp/ | json_pp 
     
@@ -105,10 +105,14 @@ def get(wesUrl):
     
 #     print(r)
     
-    if r.status_code != requests.codes.ok:      # @UndefinedVariable
-        
-        raise UserMessageException(r.text)
+    r.raise_for_status()
     
+    return r
+
+
+def getCmd(wesUrl):
+    
+    r = _get(wesUrl)
 
     contentType = r.headers['Content-Type']
     

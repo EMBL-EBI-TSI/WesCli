@@ -5,7 +5,7 @@ def upload(url, filename):
     
     with open(filename, 'rb') as f:
         
-        r = requests.post( url, files = {'file': f} )
+        r = requests.post( url, data = f )
     
     
 #     print(r)

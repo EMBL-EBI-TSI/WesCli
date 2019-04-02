@@ -3,8 +3,7 @@
 import sys
 from WesCli.ArgParser import getOpts, hasWatch
 from WesCli.WesCli import run_multiple, status_multiple
-from WesCli.exception import UserMessageException
-from WesCli.Get import get
+from WesCli.Get import getCmd
 from WesCli.Upload import upload
 import os
 
@@ -26,7 +25,7 @@ def _main(args):
 #     print(opts)
     
     if   opts['run']    :    run_multiple(opts['<runSpec>'])
-    elif opts['get']    :    get(opts['<url>'])
+    elif opts['get']    :    getCmd(opts['<url>'])
     elif opts['upload'] :    upload(opts['<url>'], opts['<filename>'])
     
     elif opts['status'] :    
