@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 
 # Pipenv goes *insane* if you don't do this
 echo 'Removing link to virtualenv (possibly created in the last run)...'
