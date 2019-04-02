@@ -1,6 +1,11 @@
 
 language: python
 
-install: ./init
+# Overriding creation of virtual env
+before_install: true
+
+install: 
+    - 'pip install pipenv'
+    - ./init
 
 script: ./runTests 
