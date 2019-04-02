@@ -1,5 +1,8 @@
 # Multi-WES CLI client
 
+[![Build Status](https://travis-ci.com/EMBL-EBI-TSI/WesCli.svg?token=u11Aix2T7c5M2Hxs5pyA&branch=master)](https://travis-ci.com/EMBL-EBI-TSI/WesCli)
+
+
 ## Instalation
 
 1. Install [pipenv](http://pipenv.org/)
@@ -20,7 +23,7 @@
     ```
     (or: edit `./install` and run it)
 
-5. `status --watch` requires [`watch`](https://en.wikipedia.org/wiki/Watch_(Unix)) to be installed.  
+5. `status --watch` depends on [`watch`](https://en.wikipedia.org/wiki/Watch_(Unix)).  
    You might already have it. Just check with:
     ```
     which watch
@@ -128,5 +131,5 @@ You can:
           inputParams:  { input: 'file:///tmp/hashSplitterInput/test2.txt' }
     ```
 
-    Notice that the value of `location` was replaced by `$input`.  
+    Notice that the value of `location` changed to `$input`.  
     `$input` is a _variable_ -- the value of which must be provided for each site in the `inputParams` attribute.
