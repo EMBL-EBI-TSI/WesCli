@@ -5,7 +5,7 @@ from WesCli.Upload import upload
 from WesCli.Main import main
 from urllib.parse import urljoin
 from uuid import uuid4
-from WesCli.Get import _get
+from WesCli.Get import cat
 
 
 
@@ -23,7 +23,7 @@ class UploadIntegrationTest(unittest.TestCase):
         
         upload('https://tes.tsi.ebi.ac.uk/data/tmp/', 'test/resources/Hello.txt')
         
-        self.assertEquals(_get('https://tes.tsi.ebi.ac.uk/data/tmp/Hello.txt').text, 'Hello, world!')
+        self.assertEquals(cat('https://tes.tsi.ebi.ac.uk/data/tmp/Hello.txt'), 'Hello, world!')
         
 
     def test_upload_cmd_line(self):
@@ -38,7 +38,7 @@ class UploadIntegrationTest(unittest.TestCase):
         
         upload(fileUrl, 'test/resources/Hello.txt')
         
-        self.assertEquals(_get(fileUrl).text, 'Hello, world!')
+        self.assertEquals(cat(fileUrl), 'Hello, world!')
         
         
     def test_upload_to_subdir(self):
@@ -49,7 +49,7 @@ class UploadIntegrationTest(unittest.TestCase):
         
         fileUrl = urljoin(dirUrl, 'Hello.txt')
         
-        self.assertEquals(_get(fileUrl).text, 'Hello, world!')
+        self.assertEquals(cat(fileUrl), 'Hello, world!')
 
 
     def test_nice_error_message(self):

@@ -3,6 +3,7 @@ import requests
 from WesCli.exception import UserMessageException
 import os
 from WesCli.url import getPath
+from typing import List
 
 
 
@@ -118,4 +119,14 @@ def getCmd(wesUrl):
     
     if contentType.startswith('application/json')   : printDir(r.json(), wesUrl) 
     else                                            : print(r.text)
+
     
+def cat(fileUrl) -> str:
+    
+    return _get(fileUrl).text
+
+
+def ls(dirUrl) -> List[DirEntry]:
+    
+    return _get(dirUrl).json()
+
