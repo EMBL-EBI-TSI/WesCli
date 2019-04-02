@@ -23,13 +23,15 @@ class UploadIntegrationTest(unittest.TestCase):
         
         upload('https://tes.tsi.ebi.ac.uk/data/tmp/', 'test/resources/Hello.txt')
         
+        self.assertEquals(_get('https://tes.tsi.ebi.ac.uk/data/tmp/Hello.txt').text, 'Hello, world!')
+        
 
     def test_upload_cmd_line(self):
         
         main(['upload', 'https://tes.tsi.ebi.ac.uk/data/tmp/', 'test/resources/Hello.txt'])
 
 
-    def test_upload_to_subdir_with_different_name(self):
+    def test_upload_to_subdir_with_different_filename(self):
         
         dirUrl = randomSubDir()
         fileUrl = urljoin(dirUrl, 'Hello2.txt')
