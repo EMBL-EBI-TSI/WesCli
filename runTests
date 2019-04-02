@@ -10,4 +10,4 @@
 #     ./runTests -vv
 #
 
-PYTHONPATH=src nosetests "$@" test/*.py
+pipenv run nosetests "$@" test/*.py

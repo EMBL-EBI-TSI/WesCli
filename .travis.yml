@@ -1,4 +1,6 @@
 
 language: python
+
 install: ./init
 
+script: ./runTests 
