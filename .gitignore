@@ -3,3 +3,4 @@ run
 *.egg-info
 __pycache__
 *.pyc
+ci/WesElixir/

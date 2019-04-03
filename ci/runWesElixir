@@ -1,0 +1,39 @@
+
+
+virtualenvActivate () { 
+
+    . .venv/bin/activate
+}
+
+virtualenvCreate() {
+
+    virtualenv --clear -p python3 .venv --prompt=''
+}
+
+#-- main -----------------------------------------------------------------------------------------
+
+# This should be invoked as:
+#
+#    ci/runWesElixir
+#
+cd ci
+
+git clone --depth=50 --branch=dev https://github.com/EMBL-EBI-TSI/WES-ELIXIR WesElixir
+cd WesElixir
+
+# Show current commit
+echo
+echo 'Current commit:'
+git --no-pager log -n 1
+echo
+
+script/startMongo
+
+virtualenvCreate
+virtualenvActivate
+script/install
+
+
+echo
+echo '-- Running --------------------------------------------------------------------------------'
+script/runLocal
