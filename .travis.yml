@@ -11,4 +11,6 @@ install:
     - 'pip install pipenv'
     - ./init
 
-script: ./runTests 
+script: 
+    - ci/runWesElixir
+    - ./runTests 
