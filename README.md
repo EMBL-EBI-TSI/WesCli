@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/EMBL-EBI-TSI/WesCli.svg?token=u11Aix2T7c5M2Hxs5pyA&branch=master)](https://travis-ci.com/EMBL-EBI-TSI/WesCli)
 
 
-## Instalation
+## Installation
 
 1. Install [pipenv](http://pipenv.org/)
     ```
