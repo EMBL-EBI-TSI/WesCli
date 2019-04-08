@@ -5,10 +5,34 @@
 
 ## Installation
 
-1. Install [pipenv](http://pipenv.org/)
-    ```
-    pip install --user pipenv
-    ```
+1. Requirements
+
+    * Python 3.6+
+    * virtualenv
+    * [pipenv](http://pipenv.org/)
+        * Ubuntu:
+        ```
+        pip install --user pipenv
+        ```
+
+        * MacOS:
+        ```
+		brew install pipenv
+        ```
+
+    * [`watch`](https://en.wikipedia.org/wiki/Watch_(Unix))
+
+        * Ubuntu:
+
+        You probably already have it. You can check with:
+        ```
+        which watch
+        ```
+
+        * MacOS:
+        ```
+        brew install watch
+        ```
 
 2. Clone this repo.
 
@@ -23,11 +47,6 @@
     ```
     (or: edit `./install` and run it)
 
-5. `status --watch` depends on [`watch`](https://en.wikipedia.org/wiki/Watch_(Unix)).  
-   You might already have it. Just check with:
-    ```
-    which watch
-    ```
 
 ## Usage and examples
 
