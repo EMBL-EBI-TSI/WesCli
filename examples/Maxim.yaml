@@ -1,0 +1,23 @@
+
+workflow: 'https://github.com/EMBL-EBI-TSI/workflow-is-cwl/blob/master/workflows/cmsearch-multimodel-wf.cwl'
+
+input:
+    clan_info:
+      path: repo/tools/cmsearch-deoverlap/test-input/ribo.claninfo
+      class: File
+
+    cores: 4
+
+    covariance_models:
+    - path: repo/tools/Infernal/cmsearch/test-input/tRNA5.c.cm
+      class: File
+    - path: repo/tools/Infernal/cmsearch/test-input/mt-tmRNA.cm
+      class: File
+
+    query_sequences:
+      path: repo/tools/Infernal/cmsearch/test-input/mrum-genome.fa
+      format: edam:format_1929
+      class: File
+
+sites: 
+    - url: https://tes.tsi.ebi.ac.uk/ga4gh/wes/v1
