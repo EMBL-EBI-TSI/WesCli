@@ -143,27 +143,25 @@ class Test(unittest.TestCase):
         url = 'https://tes.tsi.ebi.ac.uk/ga4gh/wes/v1'
         id  = '7GOLQ0'
         
-        self.assertEquals(
-                    
-            statusLine(url, id, Ok({
-                
-                'outputs': {'output': {'basename': 'unify',
-                            'checksum': 'sha1$4933476da50795db219640556d5cc613ca3804e1',
-                            'class': 'File',
-                            'location': 'file:///data/tmp/7GOLQ0/tmphay73miu/unify',
-                            'path': '/data/tmp/7GOLQ0/tmphay73miu/unify',
-                            'size': 413}}
-    
-               ,'state': 'COMPLETE'
-            }))
+        line = statusLine(url, id, Ok({
             
-            , "\n".join([
-                
-                'https://tes.tsi.ebi.ac.uk/ga4gh/wes/v1  7GOLQ0  COMPLETE'
-               ,'Outputs:'
-               ,'output: https://tes.tsi.ebi.ac.uk/data/tmp/7GOLQ0/tmphay73miu/unify'
-               ,''
-        ]))
+            'outputs': {'output': {'basename': 'unify',
+                        'checksum': 'sha1$4933476da50795db219640556d5cc613ca3804e1',
+                        'class': 'File',
+                        'location': 'file:///data/tmp/7GOLQ0/tmphay73miu/unify',
+                        'path': '/data/tmp/7GOLQ0/tmphay73miu/unify',
+                        'size': 413}}
+
+           ,'state': 'COMPLETE'
+        }))
+            
+        self.assertEquals(line.split('\n'), [
+            
+            'https://tes.tsi.ebi.ac.uk/ga4gh/wes/v1  7GOLQ0  COMPLETE'
+           ,'Outputs:'
+           ,'output: https://tes.tsi.ebi.ac.uk/data/tmp/7GOLQ0/tmphay73miu/unify'
+           ,''
+        ])
             
 
     def test_statusLine_Maxim_outputs(self):
@@ -219,14 +217,14 @@ class Test(unittest.TestCase):
         
         print(line)
             
-        self.assertEquals(line, "\n".join([
+        self.assertEquals(line.split('\n'), [
                 
             'http://localhost:8080/ga4gh/wes/v1  J6WLTA  COMPLETE'
            ,'Outputs:'
            ,'concatenate_matches: http://localhost:8080/tmp/tmprl5mn1th/cat_cmsearch_matches.tbl'
            ,'deoverlapped_matches: http://localhost:8080/tmp/tmpeygi49er/cat_cmsearch_matches.tbl.deoverlapped'
            ,''
-        ]))
+        ])
 
 
     def test_statusLine_no_outputs(self):
