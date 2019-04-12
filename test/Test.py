@@ -3,7 +3,7 @@
 import unittest
 from pprint import pprint
 from WesCli.WesCli import loadYaml, getEffectiveConf, validateSites, replace,\
-    statusLine
+    statusLine, info
 from WesCli.exception import InvalidConf
 from WesCli.either import Ok
 
@@ -157,8 +157,76 @@ class Test(unittest.TestCase):
                ,'state': 'COMPLETE'
             }))
             
-            , "https://tes.tsi.ebi.ac.uk/ga4gh/wes/v1  7GOLQ0  COMPLETE  {'output': 'https://tes.tsi.ebi.ac.uk/data/tmp/7GOLQ0/tmphay73miu/unify'}"
-        )
+            , "\n".join([
+                
+                'https://tes.tsi.ebi.ac.uk/ga4gh/wes/v1  7GOLQ0  COMPLETE'
+               ,'Outputs:'
+               ,'output: https://tes.tsi.ebi.ac.uk/data/tmp/7GOLQ0/tmphay73miu/unify'
+               ,''
+        ]))
+            
+
+    def test_statusLine_Maxim_outputs(self):
+
+        url = 'http://localhost:8080/ga4gh/wes/v1'
+        id  = 'J6WLTA'
+        
+        #########################################################################################################
+        
+#         st = info(url, id)
+#         
+#         pprint(st.v)   # DEBUG
+#         
+#         s = statusLine(url, id, st)
+#         
+#         print(s)
+        
+        #########################################################################################################
+        
+        line = statusLine(url, id, Ok({
+                 
+                'outputs': {
+                    
+#                     'cmsearch_matches': [{'basename': 'mrum-genome.fa.cmsearch_matches.tbl',
+#                                    'checksum': 'sha1$2bb3f921e9d2bfd590c4ca9a0a7d6ce24b4bf07a',
+#                                    'class': 'File',
+#                                    'location': 'file:///tmp/tmp7g11r1hn/mrum-genome.fa.cmsearch_matches.tbl',
+#                                    'path': '/tmp/tmp7g11r1hn/mrum-genome.fa.cmsearch_matches.tbl',
+#                                    'size': 8236},
+#                                   {'basename': 'mrum-genome.fa.cmsearch_matches.tbl',
+#                                    'checksum': 'sha1$6f2024e21ca2a16a8f04f03eb64fe3a19e930f7c',
+#                                    'class': 'File',
+#                                    'location': 'file:///tmp/tmp9cplgp_f/mrum-genome.fa.cmsearch_matches.tbl',
+#                                    'path': '/tmp/tmp9cplgp_f/mrum-genome.fa.cmsearch_matches.tbl',
+#                                    'size': 1176}],
+                    
+                    'concatenate_matches': {'basename': 'cat_cmsearch_matches.tbl',
+                                     'checksum': 'sha1$158894850248d5d9510b235b5c02dc106da26532',
+                                     'class': 'File',
+                                     'location': 'file:///tmp/tmprl5mn1th/cat_cmsearch_matches.tbl',
+                                     'path': '/tmp/tmprl5mn1th/cat_cmsearch_matches.tbl',
+                                     'size': 9412},
+                    
+                    'deoverlapped_matches': {'basename': 'cat_cmsearch_matches.tbl.deoverlapped',
+                                      'checksum': 'sha1$4d88865ee67b33fbf3db268a211fce9dbff715dd',
+                                      'class': 'File',
+                                      'location': 'file:///tmp/tmpeygi49er/cat_cmsearch_matches.tbl.deoverlapped',
+                                      'path': '/tmp/tmpeygi49er/cat_cmsearch_matches.tbl.deoverlapped',
+                                      'size': 7490}}
+     
+               ,'state': 'COMPLETE'
+            }))
+        
+        print(line)
+            
+        self.assertEquals(line, "\n".join([
+                
+            'http://localhost:8080/ga4gh/wes/v1  J6WLTA  COMPLETE'
+           ,'Outputs:'
+           ,'concatenate_matches: http://localhost:8080/tmp/tmprl5mn1th/cat_cmsearch_matches.tbl'
+           ,'deoverlapped_matches: http://localhost:8080/tmp/tmpeygi49er/cat_cmsearch_matches.tbl.deoverlapped'
+           ,''
+        ]))
 
 
     def test_statusLine_no_outputs(self):

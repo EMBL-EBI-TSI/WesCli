@@ -184,7 +184,7 @@ def run_multiple(yamlFilename):
     return localState.sites
 
 
-def formatOutputs(outputsBaseUrl, outputs):
+def pickUrls(outputsBaseUrl, outputs):
     '''
     {
       "output": {
@@ -206,14 +206,21 @@ def formatOutputs(outputsBaseUrl, outputs):
     return { name: outputUrl(o) for (name, o) in outputs.items() }
 
 
+def formatOutputs(outputs):
+    
+    return 'Outputs:\n'              \
+         + yaml.dump(outputs)
+
+
 def statusLine(url, id, st):
     
     outputsBaseUrl = getBaseUrl(url)
     
-    state       = st.v['state']                                     if st.isOk() else None
-    outputs     = formatOutputs(outputsBaseUrl, st.v['outputs'])    if st.isOk() else None
+    state       = st.v['state']                                if st.isOk() else None
+    outputs     = pickUrls(outputsBaseUrl, st.v['outputs'])    if st.isOk() else None
     
-    return '  '.join([str(x) for x in [url, id, state, outputs] if x])    # filter out the falsy ones (e.g. {}) and join the rest.
+    return '  '.join([url, id, state])  \
+       + (f'\n{formatOutputs(outputs)}' if outputs else '')
 
 
 def status_multiple():
