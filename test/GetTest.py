@@ -42,8 +42,8 @@ class GetTest(unittest.TestCase):
         
         formatLine = newFormatLine('https://tes.tsi.ebi.ac.uk/data/tmp/')
         
-        self.assertEquals(formatLine(helloFile) , 'Hello.txt                      (file://data/tmp/Hello.txt)' )
-        self.assertEquals(formatLine(aDir)      , 'ZE4HDH/                        (file://data/tmp/ZE4HDH/)'   )
+        self.assertEquals(formatLine(helloFile) , 'Hello.txt                      (file:///data/tmp/Hello.txt)' )
+        self.assertEquals(formatLine(aDir)      , 'ZE4HDH/                        (file:///data/tmp/ZE4HDH/)'   )
         
         
     

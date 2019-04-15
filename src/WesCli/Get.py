@@ -36,7 +36,7 @@ def newFormatLine(wesUrl):
     
     def fileUrl(filename):
         
-        return f"file:/{os.path.join(basePath, filename)}"
+        return f"file://{os.path.join(basePath, filename)}"
 
 
     def formatLine(e):
