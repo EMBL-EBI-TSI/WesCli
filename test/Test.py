@@ -185,18 +185,18 @@ class Test(unittest.TestCase):
                  
                 'outputs': {
                     
-#                     'cmsearch_matches': [{'basename': 'mrum-genome.fa.cmsearch_matches.tbl',
-#                                    'checksum': 'sha1$2bb3f921e9d2bfd590c4ca9a0a7d6ce24b4bf07a',
-#                                    'class': 'File',
-#                                    'location': 'file:///tmp/tmp7g11r1hn/mrum-genome.fa.cmsearch_matches.tbl',
-#                                    'path': '/tmp/tmp7g11r1hn/mrum-genome.fa.cmsearch_matches.tbl',
-#                                    'size': 8236},
-#                                   {'basename': 'mrum-genome.fa.cmsearch_matches.tbl',
-#                                    'checksum': 'sha1$6f2024e21ca2a16a8f04f03eb64fe3a19e930f7c',
-#                                    'class': 'File',
-#                                    'location': 'file:///tmp/tmp9cplgp_f/mrum-genome.fa.cmsearch_matches.tbl',
-#                                    'path': '/tmp/tmp9cplgp_f/mrum-genome.fa.cmsearch_matches.tbl',
-#                                    'size': 1176}],
+                    'cmsearch_matches': [{'basename': 'mrum-genome.fa.cmsearch_matches.tbl',
+                                   'checksum': 'sha1$2bb3f921e9d2bfd590c4ca9a0a7d6ce24b4bf07a',
+                                   'class': 'File',
+                                   'location': 'file:///tmp/tmp7g11r1hn/mrum-genome.fa.cmsearch_matches.tbl',
+                                   'path': '/tmp/tmp7g11r1hn/mrum-genome.fa.cmsearch_matches.tbl',
+                                   'size': 8236},
+                                  {'basename': 'mrum-genome.fa.cmsearch_matches.tbl',
+                                   'checksum': 'sha1$6f2024e21ca2a16a8f04f03eb64fe3a19e930f7c',
+                                   'class': 'File',
+                                   'location': 'file:///tmp/tmp9cplgp_f/mrum-genome.fa.cmsearch_matches.tbl',
+                                   'path': '/tmp/tmp9cplgp_f/mrum-genome.fa.cmsearch_matches.tbl',
+                                   'size': 1176}],
                     
                     'concatenate_matches': {'basename': 'cat_cmsearch_matches.tbl',
                                      'checksum': 'sha1$158894850248d5d9510b235b5c02dc106da26532',
@@ -221,6 +221,9 @@ class Test(unittest.TestCase):
                 
             'http://localhost:8080/ga4gh/wes/v1  J6WLTA  COMPLETE'
            ,'Outputs:'
+           ,'cmsearch_matches:'
+           ,'- http://localhost:8080/tmp/tmp7g11r1hn/mrum-genome.fa.cmsearch_matches.tbl'
+           ,'- http://localhost:8080/tmp/tmp9cplgp_f/mrum-genome.fa.cmsearch_matches.tbl'
            ,'concatenate_matches: http://localhost:8080/tmp/tmprl5mn1th/cat_cmsearch_matches.tbl'
            ,'deoverlapped_matches: http://localhost:8080/tmp/tmpeygi49er/cat_cmsearch_matches.tbl.deoverlapped'
            ,''

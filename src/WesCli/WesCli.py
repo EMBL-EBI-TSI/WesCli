@@ -8,7 +8,7 @@ from pydash.collections import partition
 from WesCli.exception import InvalidConf
 from pydash.predicates import is_string
 from pydash.objects import map_values_deep, clone_deep
-from typing import Optional
+from typing import Optional, Union, List, Dict
 import json
 from pprint import pprint
 from urllib.parse import urlsplit, urljoin
@@ -198,9 +198,13 @@ def pickUrls(outputsBaseUrl, outputs):
     }
     '''
     
-    def outputUrl(o):
+    def outputUrl(o: Union[List, Dict]):
         
-        return urljoin(outputsBaseUrl, o['path'])
+        def f(o : Dict): return urljoin(outputsBaseUrl, o['path'])
+
+        
+        if isinstance(o, List) : return [f(x) for x in o]
+        else                   : return f(o)
 
 
     return { name: outputUrl(o) for (name, o) in outputs.items() }
