@@ -6,7 +6,7 @@ import os
 from WesCli.exception import UserMessageException
 
 
-DOT_FILE = '.wes'
+DOT_FILE = os.path.join(os.environ.get('HOME'), '.config/WesCli/state')
         
 
 class LocalState(object):
@@ -43,7 +43,17 @@ class LocalState(object):
         self.sites.append(s)
         
 
+    def createConfigFolderIfNecessary(self):
+        
+        folder = os.path.dirname(DOT_FILE)
+        if not os.path.exists(folder):
+            os.mkdir(folder)
+
+
     def save(self):
+        
+        # The 1st time, the directory might not exist
+        self.createConfigFolderIfNecessary()
         
         with open(DOT_FILE, 'w') as f:
         
