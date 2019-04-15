@@ -15,6 +15,9 @@
         pip install --user pipenv
         ```
 
+        Note: **don't use `pip3`**. Things installed with `pip3` don't end up in `PATH`, so it won't work.  
+        (Yes, I know this is confusing. I just told you to use Python 3. But that's the way things are).
+
         * MacOS:
         ```
 		brew install pipenv
