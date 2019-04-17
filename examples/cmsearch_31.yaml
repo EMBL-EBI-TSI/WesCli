@@ -1,0 +1,78 @@
+
+workflow: 'https://github.com/EMBL-EBI-TSI/workflow-is-cwl/blob/master/workflows/cmsearch-multimodel-wf.cwl'
+
+input:
+    clan_info:
+      path: https://raw.githubusercontent.com/mscheremetjew/workflow-is-cwl/87799c713ed7aa7b41c2f1b367825d509e47fbd2/tools/cmsearch-deoverlap/test-input/ribo.claninfo
+      class: File
+    cores: 4
+    covariance_models:
+      - class: File
+        location: http://rfam.org/family/RF00002/cm
+      - class: File
+        location: http://rfam.org/family/RF00177/cm
+      - class: File
+        location: http://rfam.org/family/RF01959/cm
+      - class: File
+        location: http://rfam.org/family/RF01960/cm
+      - class: File
+        location: http://rfam.org/family/RF02540/cm
+      - class: File
+        location: http://rfam.org/family/RF02541/cm
+      - class: File
+        location: http://rfam.org/family/RF02542/cm
+      - class: File
+        location: http://rfam.org/family/RF02543/cm
+      - class: File
+        location: http://rfam.org/family/RF02546/cm
+      - class: File
+        location: http://rfam.org/family/RF02547/cm
+      - class: File
+        location: http://rfam.org/family/RF01849/cm
+      - class: File
+        location: http://rfam.org/family/RF01854/cm
+      - class: File
+        location: http://rfam.org/family/RF01850/cm
+      - class: File
+        location: http://rfam.org/family/RF01570/cm
+      - class: File
+        location: http://rfam.org/family/RF00017/cm
+      - class: File
+        location: http://rfam.org/family/RF01855/cm
+      - class: File
+        location: http://rfam.org/family/RF00030/cm
+      - class: File
+        location: http://rfam.org/family/RNaseP_bact_a/cm
+      - class: File
+        location: http://rfam.org/family/RNase_P/cm
+      - class: File
+        location: http://rfam.org/family/tmRNA/cm
+      - class: File
+        location: http://rfam.org/family/tRNA-Sec/cm
+      - class: File
+        location: http://rfam.org/family/Archaea_SRP/cm
+      - class: File
+        location: http://rfam.org/family/Bacteria_small_SRP/cm
+      - class: File
+        location: http://rfam.org/family/cyano_tmRNA/cm
+      - class: File
+        location: http://rfam.org/family/Fungi_SRP/cm
+      - class: File
+        location: http://rfam.org/family/mt-tmRNA/cm
+      - class: File
+        location: http://rfam.org/family/Protozoa_SRP/cm
+      - class: File
+        location: http://rfam.org/family/RNaseP_arch/cm
+      - class: File
+        location: http://rfam.org/family/RNaseP_bact_b/cm
+      - class: File
+        location: http://rfam.org/family/RNaseP_nuc/cm
+      - class: File
+        location: http://rfam.org/family/tRNA/cm
+    query_sequences:
+      path: file:///data/tmp/maxim/fasta
+      format: edam:format_1929
+      class: File
+
+sites: 
+    - url: https://tes.tsi.ebi.ac.uk/ga4gh/wes/v1
