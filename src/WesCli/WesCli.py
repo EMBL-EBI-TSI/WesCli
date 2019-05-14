@@ -200,7 +200,11 @@ def pickUrls(outputsBaseUrl, outputs):
     
     def outputUrl(o: Union[List, Dict]):
         
-        def f(o : Dict): return urljoin(outputsBaseUrl, o['path'])
+        def f(o : Dict):
+            try:
+                return urljoin(outputsBaseUrl, o['path'])
+            except:
+                return None
 
         
         if isinstance(o, List) : return [f(x) for x in o]
