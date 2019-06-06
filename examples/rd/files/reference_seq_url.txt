@@ -1,0 +1,4 @@
+url = http://site-storage/rd/full/hs37d5.fa.gz
+output = hs37d5.fa.gz
+
+

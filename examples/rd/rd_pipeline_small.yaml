@@ -1,0 +1,23 @@
+workflow: 'https://github.com/aniewielska/RD_pipeline/blob/master/workflow.cwl'
+
+input:
+    curl_fastq_urls:
+      class: File
+      path: file:///data/tmp/rd/small/fastq_files_urls.txt
+    curl_reference_genome_url:
+      class: File
+      path: file:///data/tmp/rd/small/reference_seq_url.txt
+    curl_known_indels_url:
+      class: File
+      path: file:///data/tmp/rd/small/known_indels_url.txt
+    curl_known_sites_url:
+      class: File
+      path: file:///data/tmp/rd/small/known_sites_url.txt
+    lftp_out_conf:
+      class: File
+      path: http:///data/tmp/lftp.txt
+    readgroup_str: '@RG\tID:Seq01p\tSM:Seq01\tPL:ILLUMINA\tPI:330'
+    sample_name: "abc1"
+    chromosome: "21"
+sites: 
+    - url: https://wes-tes-example.tsi.ebi.ac.uk/ga4gh/wes/v1

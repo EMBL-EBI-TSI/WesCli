@@ -1,0 +1,3 @@
+url = http://site-storage/rd/full/dbsnp_138.b37.vcf.gz
+output = dbsnp_138.b37.vcf.gz
+
