@@ -70,9 +70,9 @@ input:
       - class: File
         location: http://rfam.org/family/tRNA/cm
     query_sequences:
-      path: file:///data/tmp/maxim/fasta
+      path: http://site-storage/cmsearch/fasta
       format: edam:format_1929
       class: File
 
 sites: 
-    - url: https://tes.tsi.ebi.ac.uk/ga4gh/wes/v1
+    - url: https://wes-tes-example.tsi.ebi.ac.uk/ga4gh/wes/v1
