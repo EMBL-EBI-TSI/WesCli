@@ -1,0 +1,15 @@
+
+
+workflow: 'https://github.com/fgypas/cwl-example-workflows/blob/master/hashsplitter-workflow.cwl'
+
+input:
+  input:
+    class: File
+    location: $input_url
+
+sites: 
+    - url:          https://wes-tes-example.tsi.ebi.ac.uk/ga4gh/wes/v1
+      inputParams:  { input_url: 'http://site-storage/hashsplitter/hello.txt' }
+    - url:          https://wes-tes-example1.tsi.ebi.ac.uk/ga4gh/wes/v1
+      inputParams:  { input_url: 'http://site-storage/hashsplitter/hi.txt' }
+

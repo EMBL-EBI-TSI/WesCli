@@ -1,0 +1,11 @@
+
+
+workflow: 'https://github.com/fgypas/cwl-example-workflows/blob/master/hashsplitter-workflow.cwl'
+
+input:
+  input:
+    class: File
+    location: https://github.com/fgypas/cwl-example-workflows/blob/master/resources/test.txt
+
+sites: 
+    - url: https://wes-tes-example.tsi.ebi.ac.uk/ga4gh/wes/v1

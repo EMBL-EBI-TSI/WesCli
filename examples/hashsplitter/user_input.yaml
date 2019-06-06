@@ -8,4 +8,4 @@ input:
     location: file:///data/tmp/README.md
 
 sites: 
-    - url: https://tes.tsi.ebi.ac.uk/ga4gh/wes/v1
+    - url: https://wes-tes-example.tsi.ebi.ac.uk/ga4gh/wes/v1
