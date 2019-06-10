@@ -14,6 +14,7 @@ pydash = "*"
 funcy = "*"
 mypy = "*"
 nose = "*"
+progressbar2 = "*"
 
 [requires]
 python_version = "3.6"

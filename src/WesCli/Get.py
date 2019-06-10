@@ -4,7 +4,7 @@ from WesCli.exception import UserMessageException
 import os
 from WesCli.url import getPath
 from typing import List
-
+import progressbar
 
 
 class DirEntry(TypedDict):
@@ -130,3 +130,22 @@ def ls(dirUrl) -> List[DirEntry]:
     
     return _get(dirUrl).json()
 
+
+def download(url, progress=False):
+    CHUNK_SIZE = 64 * 1024
+    file_name = url.split('/')[-1]
+    rq = requests.get(url, stream=True)
+
+    if progress:
+        file_length = int(rq.headers['Content-length'])
+        with progressbar.ProgressBar(max_value=file_length) as bar:
+            size = 0
+            with open(file_name, 'wb') as fd:
+                for chunk in rq.iter_content(chunk_size=CHUNK_SIZE):
+                    fd.write(chunk)
+                    size += len(chunk)
+                    bar.update(size)
+    else:
+        with open(file_name, 'wb') as fd:
+            for chunk in rq.iter_content(chunk_size=CHUNK_SIZE):
+                fd.write(chunk)
