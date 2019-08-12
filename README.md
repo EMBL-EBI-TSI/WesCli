@@ -57,20 +57,20 @@ Here's what you can do so far:
 
 * Run a workflow on a single site:
 ```
-wes run examples/singleSite_real_cluster.yaml
+wes run examples/hashsplitter/remote_input.yaml
 ```
 
 * Run a workflow on a multiple sites:
 ```
-wes run examples/sites.yaml
+wes run examples/hashsplitter/site_input_multi.yaml
 ```
 
-* Get status of all currently running workflows:
+* Get status of the most recently run workflow:
 ```
 wes status
 ```
 
-* Watch the status of all currently running workflows:
+* Watch the status of the most recently run workflow:
 ```
 wes status --watch
 ```
@@ -80,23 +80,33 @@ wes status --watch
 * Browse the workspace:
 
     ```
-    $ wes get https://tes.tsi.ebi.ac.uk/data/tmp/
+    $ wes get https://wes-tes-example.tsi.ebi.ac.uk/data/tmp/
     YO15EZ/                        (file://data/tmp/YO15EZ/)
     Z9BNOH/                        (file://data/tmp/Z9BNOH/)
     ZE4HDH/                        (file://data/tmp/ZE4HDH/)
-    evil.json                      (file://data/tmp/evil.json)
     Hello.txt                      (file://data/tmp/Hello.txt)
     ```
 
 * Get the contents of a file:
     ```
-    $ wes get https://tes.tsi.ebi.ac.uk/data/tmp/Hello.txt
+    $ wes get https://wes-tes-example.tsi.ebi.ac.uk/data/tmp/Hello.txt
     Hello, world!
     ```
-* Upload a file:
+* Upload a file (with a name preserved):
     ```
-    wes upload https://tes.tsi.ebi.ac.uk/data/tmp/ README.md
+    wes upload https://wes-tes-example.tsi.ebi.ac.uk/data/tmp/ README.md
+    wes get https://wes-tes-example.tsi.ebi.ac.uk/data/tmp/README.md
     ```
+* Upload a file (with a chosen file name):
+    ```
+    wes upload https://wes-tes-example.tsi.ebi.ac.uk/data/tmp/readthis.md README.md
+    wes get https://wes-tes-example.tsi.ebi.ac.uk/data/tmp/readthis.md
+    ```
+* Download a file (with a optional progress bar):
+    ```
+    wes download -p https://wes-tes-example.tsi.ebi.ac.uk/data/tmp/Hello.txt
+    ```
+
 
 ### Run spec file
 
@@ -115,7 +125,7 @@ You can:
         location: file:///data/tmp/README.md
 
     sites:
-        - url: https://tes.tsi.ebi.ac.uk/ga4gh/wes/v1
+        - url: https://wes-tes-example.tsi.ebi.ac.uk/ga4gh/wes/v1
     ```
 
 * Run a workflow on multiple sites, with the same input:
@@ -131,12 +141,12 @@ You can:
         location: file:///data/tmp/README.md
 
     sites:
-        - url: https://tes1.tsi.ebi.ac.uk/ga4gh/wes/v1
-        - url: https://tes2.tsi.ebi.ac.uk/ga4gh/wes/v1
-        - url: https://tes3.tsi.ebi.ac.uk/ga4gh/wes/v1
+        - url: https://wes-tes-example1.tsi.ebi.ac.uk/ga4gh/wes/v1
+        - url: https://wes-tes-example2.tsi.ebi.ac.uk/ga4gh/wes/v1
+        - url: https://wes-tes-example3.tsi.ebi.ac.uk/ga4gh/wes/v1
     ```
 
-* Run a workflow on multiple sites, with the different inputs:
+* Run a workflow on multiple sites, with different inputs:
 
     ```yaml
     workflow: 'https://github.com/fgypas/cwl-example-workflows/blob/master/hashsplitter-workflow.cwl'
@@ -147,9 +157,9 @@ You can:
         location: $input
 
     sites:
-        - url:          http://localhost:8080/ga4gh/wes/v1
+        - url:          https://wes-tes-example1/ga4gh/wes/v1
           inputParams:  { input: 'file:///tmp/hashSplitterInput/test1.txt' }
-        - url:          http://localhost:8080/ga4gh/wes/v1
+        - url:          https://wes-tes-example2/ga4gh/wes/v1
           inputParams:  { input: 'file:///tmp/hashSplitterInput/test2.txt' }
     ```
 
