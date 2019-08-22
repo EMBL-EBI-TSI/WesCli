@@ -9,27 +9,27 @@ import os
 
 
 def main(args):
-    
+
     try:
         _main(args)
-    
+
     except Exception as e:
-        
+
         print(e)
-        
-    
+
+
 def _main(args):
-    
+
     opts = getOpts(args)
-    
+
 #     print(opts)
-    
+
     if   opts['run']    :    run_multiple(opts['<runSpec>'])
     elif opts['get']    :    getCmd(opts['<url>'])
-    elif opts['upload'] :    upload(opts['<url>'], opts['<filename>'])
+    elif opts['upload'] :    upload(opts['<filename>'], opts['<url>'])
     elif opts['download'] :  download(opts['<url>'], opts['-p'])
-    elif opts['status'] :    
-        
+    elif opts['status'] :
+
         if hasWatch(opts) : os.system('watch -n 1 -d wes status')
         else              : status_multiple()
 
