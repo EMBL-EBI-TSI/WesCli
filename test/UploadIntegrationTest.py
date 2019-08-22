@@ -10,51 +10,51 @@ from WesCli.Get import cat
 
 
 def randomSubDir():
-    
-    return f'https://tes.tsi.ebi.ac.uk/data/tmp/subDirTest/{uuid4()}/'
+
+    return f'https://tes1.tsi.ebi.ac.uk/data/tmp/subDirTest/{uuid4()}/'
 
 
 class UploadIntegrationTest(unittest.TestCase):
-    
+
     def test_upload(self):
         '''
-        wes upload https://tes.tsi.ebi.ac.uk/data/tmp/ file.txt
+        wes upload file.txt https://tes1.tsi.ebi.ac.uk/data/tmp/
         '''
-        
-        upload('https://tes.tsi.ebi.ac.uk/data/tmp/', 'test/resources/Hello.txt')
-        
-        self.assertEquals(cat('https://tes.tsi.ebi.ac.uk/data/tmp/Hello.txt'), 'Hello, world!')
-        
+
+        upload('./resources/Hello.txt', 'https://tes1.tsi.ebi.ac.uk/data/tmp/')
+
+        self.assertEquals(cat('https://tes1.tsi.ebi.ac.uk/data/tmp/Hello.txt'), 'Hello, world!')
+
 
     def test_upload_cmd_line(self):
-        
-        main(['upload', 'https://tes.tsi.ebi.ac.uk/data/tmp/', 'test/resources/Hello.txt'])
+
+        main(['upload', './resources/Hello.txt', 'https://tes1.tsi.ebi.ac.uk/data/tmp/'])
 
 
     def test_upload_to_subdir_with_different_filename(self):
-        
+
         dirUrl = randomSubDir()
-        fileUrl = urljoin(dirUrl, 'Hello2.txt')
-        
-        upload(fileUrl, 'test/resources/Hello.txt')
-        
-        self.assertEquals(cat(fileUrl), 'Hello, world!')
-        
-        
-    def test_upload_to_subdir(self):
-        
-        dirUrl = randomSubDir()
-        
-        upload(dirUrl, 'test/resources/Hello.txt')
-        
         fileUrl = urljoin(dirUrl, 'Hello.txt')
-        
+
+        upload('./resources/Hello.txt', fileUrl)
+
+        self.assertEquals(cat(fileUrl), 'Hello, world!')
+
+
+    def test_upload_to_subdir(self):
+
+        dirUrl = randomSubDir()
+
+        upload('./resources/Hello.txt', dirUrl)
+
+        fileUrl = urljoin(dirUrl, 'Hello.txt')
+
         self.assertEquals(cat(fileUrl), 'Hello, world!')
 
 
     def test_nice_error_message(self):
-        
-        main(['upload', 'https://tes.tsi.ebi.ac.uk/data/', 'test/resources/Hello.txt'])
+
+        main(['upload', './resources/Hello.txt', 'https://tes1.tsi.ebi.ac.uk/data/tmp/'])
 
 
 
