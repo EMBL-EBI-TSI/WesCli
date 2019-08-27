@@ -94,12 +94,12 @@ wes status --watch
     ```
 * Upload a file (with a name preserved):
     ```
-    wes upload https://wes-tes-example.tsi.ebi.ac.uk/data/tmp/ README.md
+    wes upload README.md https://wes-tes-example.tsi.ebi.ac.uk/data/tmp/
     wes get https://wes-tes-example.tsi.ebi.ac.uk/data/tmp/README.md
     ```
 * Upload a file (with a chosen file name):
     ```
-    wes upload https://wes-tes-example.tsi.ebi.ac.uk/data/tmp/readthis.md README.md
+    wes upload README.md https://wes-tes-example.tsi.ebi.ac.uk/data/tmp/readthis.md
     wes get https://wes-tes-example.tsi.ebi.ac.uk/data/tmp/readthis.md
     ```
 * Download a file (with a optional progress bar):
