@@ -106,8 +106,15 @@ wes status --watch
     ```
     wes download -p https://wes-tes-example.tsi.ebi.ac.uk/data/tmp/Hello.txt
     ```
-
-
+* Download a file (with option to specify download location and filename):
+    ```
+    wes download --destination ./examples/readthis.md https://wes-tes-example.tsi.ebi.ac.uk/data/tmp/README.md
+    ```
+* Download a file (with option to specify filename):
+    ```
+    wes download --destination readthis.md https://wes-tes-example.tsi.ebi.ac.uk/data/tmp/README.md
+    ```
+    
 ### Run spec file
 
 The argument to `wes run` must be a yaml file with a specific format. You can find some examples [here](examples/).
