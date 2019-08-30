@@ -21,22 +21,22 @@ class UploadIntegrationTest(unittest.TestCase):
         wes upload file.txt https://tes1.tsi.ebi.ac.uk/data/tmp/
         '''
 
-        upload('./resources/Hello.txt', 'https://tes1.tsi.ebi.ac.uk/data/tmp/')
+        upload('test/resources/Hello.txt', 'https://tes1.tsi.ebi.ac.uk/data/tmp/')
 
         self.assertEquals(cat('https://tes1.tsi.ebi.ac.uk/data/tmp/Hello.txt'), 'Hello, world!')
 
 
     def test_upload_cmd_line(self):
 
-        main(['upload', './resources/Hello.txt', 'https://tes1.tsi.ebi.ac.uk/data/tmp/'])
+        main(['upload', 'test/resources/Hello.txt', 'https://tes1.tsi.ebi.ac.uk/data/tmp/'])
 
 
     def test_upload_to_subdir_with_different_filename(self):
 
         dirUrl = randomSubDir()
-        fileUrl = urljoin(dirUrl, 'Hello.txt')
+        fileUrl = urljoin(dirUrl, 'Hello2.txt')
 
-        upload('./resources/Hello.txt', fileUrl)
+        upload('test/resources/Hello.txt', fileUrl)
 
         self.assertEquals(cat(fileUrl), 'Hello, world!')
 
@@ -45,7 +45,7 @@ class UploadIntegrationTest(unittest.TestCase):
 
         dirUrl = randomSubDir()
 
-        upload('./resources/Hello.txt', dirUrl)
+        upload('test/resources/Hello.txt', dirUrl)
 
         fileUrl = urljoin(dirUrl, 'Hello.txt')
 
@@ -54,7 +54,7 @@ class UploadIntegrationTest(unittest.TestCase):
 
     def test_nice_error_message(self):
 
-        main(['upload', './resources/Hello.txt', 'https://tes1.tsi.ebi.ac.uk/data/tmp/'])
+        main(['upload', 'test/resources/Hello.txt', 'https://tes1.tsi.ebi.ac.uk/data/tmp/'])
 
 
 
