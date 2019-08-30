@@ -18,12 +18,16 @@ Usage:
     wes run <runSpec>
     wes status [-w|--watch]
     wes get <url>
-    wes download [-p] <url>
+    wes download [-p|--progress] [-d <location>|--destination=<location>] <url>
     wes upload <filename> <url>
 
 Options:
-  -h --help                          Shows this screen.
-  -p                                 Display progress bar when downloading file
+  -h --help                                                 Shows this screen.
+  -p --progress                                             Display progress bar when downloading file.
+  -d <location> --destination <location>                    Designate a destination when downloading file. User can
+                                                            specify a filename and directory for downloaded file to
+                                                            appear in.
+
 """
 
     return docopt(doc, argv=args)

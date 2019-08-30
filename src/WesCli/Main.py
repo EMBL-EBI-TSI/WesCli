@@ -27,7 +27,7 @@ def _main(args):
     if   opts['run']    :    run_multiple(opts['<runSpec>'])
     elif opts['get']    :    getCmd(opts['<url>'])
     elif opts['upload'] :    upload(opts['<filename>'], opts['<url>'])
-    elif opts['download'] :  download(opts['<url>'], opts['-p'])
+    elif opts['download'] :  download(opts['<url>'], opts['--progress'], opts['--destination'])
     elif opts['status'] :
 
         if hasWatch(opts) : os.system('watch -n 1 -d wes status')
