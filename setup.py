@@ -10,6 +10,7 @@ setup(
     package_dir = {'':'src'},
     python_requires=">=3.6",
     install_requires=[
+        "e1839a8",
         "pyyaml",
         "requests",
         "docopt",
