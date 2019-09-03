@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/EMBL-EBI-TSI/WesCli.svg?token=u11Aix2T7c5M2Hxs5pyA&branch=master)](https://travis-ci.com/EMBL-EBI-TSI/WesCli)
 
 
-## Installation
+## Installation (Creating a new virtual environment)
 
 1. Requirements
 
@@ -50,7 +50,17 @@
     ```
     (or: edit `./install` and run it)
 
+## Installation (into an existing virtual enviornment)
 
+1. Requirements 
+
+    * Existing virtual environment (Python 3.6+)
+
+2. Pip install this repository
+    ```
+    pip install -e git+https://github.com/EMBL-EBI-TSI/WesCli#egg=WesCli
+    ```
+    
 ## Usage and examples
 
 Here's what you can do so far:
